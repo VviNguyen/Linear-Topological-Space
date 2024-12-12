@@ -1,0 +1,3004 @@
+\documentclass[12pt, reqno]{amsart}
+
+\usepackage[latin1]{inputenc}
+\usepackage{latexsym}
+\usepackage{amsfonts}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{comment}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{tocloft} 
+\setlength{\cftsecindent}{0pt} 
+\setlength{\cftsubsecindent}{1.5em}
+\setlength{\cftsubsubsecindent}{3em}
+\setlength{\cftbeforesecskip}{0.5em}
+\titleformat{\section}
+  {\normalfont\large \bfseries}
+  {\thesection}
+  {1em}
+  {}
+
+\titleformat{\subsection}
+  {\normalfont\large \bfseries}
+  {\thesubsection}
+  {0em}
+  {. }
+
+\titleformat{\subsubsection}
+  {\normalfont\large \bfseries}
+  {\thesubsubsection}
+  {0em}
+  {. }
+
+
+% Reduce space after section title
+\titlespacing{\section}
+  {0pt}    % Left indentation
+  {0ex}  % Space before the section title
+  {0ex}  % Space after the section title
+
+% Reduce space after section title
+\titlespacing{\subsection}
+  {0pt}    % Left indentation
+  {0ex}  % Space before the section title
+  {0ex}  % Space after the section title
+
+% Reduce space after section title
+\titlespacing{\subsubsection}
+  {0pt}    % Left indentation
+  {0ex}  % Space before the section title
+  {0ex}  % Space after the section title
+
+% Redefine theorem style with reduced spacing
+\newtheoremstyle{tightstyle}
+  {0pt}   % Space above
+  {0pt}   % Space below
+  {\itshape} % Body font
+  {}      % Indent amount
+  {\bfseries} % Theorem head font
+  {.}     % Punctuation after theorem head
+  { }     % Space after theorem head
+  {}      % Theorem head spec
+%% Numbering issues
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+
+
+
+%% New Commands
+\newcommand{\dC}{{\mathbb C}}
+\newcommand{\dR}{{\mathbb R}}
+\newcommand{\dF}{{\mathbb F}}
+\newcommand{\dN}{{\mathbb N}}
+\newcommand{\dQ}{{\mathbb Q}}
+\newcommand{\vsp}{\vspace{0.5cm}}
+\newcommand{\tab}{\hspace{1cm}}
+\newcommand{\tabb}{\hspace*{1cm}}
+
+
+
+\begin{document}
+\begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    
+    {\Huge\bfseries LINEAR TOPOLOGICAL SPACE\par}
+    \vspace{2cm}
+    
+    {\Large\textbf{VU TUONG VI NGUYEN}\par}
+    \vspace{2cm}
+    
+    {\large{under the supervision of} \par}
+    {\Large\textbf{Dr. Mei-Qin Zhan}\par}
+    \vspace{1.5cm}
+
+    \vfill
+    
+    {\large\textbf{Department of Mathematics and Statistics} \par}
+    {\large University of North Florida \par}
+    \vspace{1cm}
+    
+    {\large December 2024 \par}
+\end{titlepage}
+
+\newpage
+
+{\hspace*{4.5cm}\large\bfseries ACKNOWLEDGEMENTS\par}
+    \vspace{1cm}
+I would like to express my sincere gratitude to my advisor, \textit{Dr. Mei-Qin Zhan}, for his invaluable guidance, continuous support, and encouragement throughout the course of my research and thesis preparation. His expertise and insights have been instrumental in the successful completion of this work.\\
+
+I am also deeply appreciative of my committee members, \textit{Dr.~Daniel~Dreibelbis} and \textit{Dr.~Mohammad~Rahman}, for taking the time to evaluate my thesis.\\
+
+Finally, I would like to extend my heartfelt thanks to my family, friends, and the Department of Mathematics and Statistics at the University of North Florida for their support and encouragement during this academic journey.
+
+\vspace{1.5cm}
+{\hspace*{12cm}\Medium\bfseries Vu Tuong Vi Nguyen\par}
+    \vspace{1cm}
+
+\newpage
+\begin{abstract}
+This thesis investigates the foundational properties of linear topological spaces, focusing on their role in functional analysis and applications. The work begins with fundamental concepts such as neighborhoods and convexity, progressing to structural properties like separation and normality, which underpin the study of topological spaces. Advanced topics, including reflexivity, weak, and weak* topologies, are explored in depth, supported by key results such as the Banach-Steinhaus and Hahn-Banach Theorems. The thesis culminates in an application-driven discussion, highlighting the relevance of these properties in solving non-linear partial differential equations.
+\end{abstract}
+\maketitle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\tableofcontents
+\newpage
+\doublespacing
+
+\section{Introduction}
+Linear topological spaces, or topological vector spaces, form a bridge between algebra and topology, offering a framework to explore continuity and convergence within an algebraic structure. This introduction defines and emphasizes their significance, from basic linear algebra to functional analysis, and highlights their applicability to real-world problems in fields like differential equations, quantum mechanics, and numerical analysis.
+
+A linear topological space is a vector space equipped with a compatible topology, ensuring the continuity of vector addition and scalar multiplication. This alignment of algebraic and topological structures enables a deeper examination of limits, sequence behavior, and function dynamics, essential in spaces like Banach and Hilbert spaces. Through these spaces, we access essential theorems, including the Banach-Steinhaus, Hahn-Banach, and Open Mapping theorems that reveal fundamental properties, such as boundedness, continuity, and completeness, within linear topological contexts.
+
+This thesis will proceed by introducing linear and topological spaces individually, allowing for a thorough grounding in their definitions and structures, before merging them to develop linear topological spaces. We'll then focus on key properties and theorems central to their study, highlighting renowned spaces like Banach and Hilbert spaces. Special attention will be given to how these structures inform solution behavior, aiding in methods like fixed-point theorems and functional analysis techniques crucial for problem-solving in applied settings.
+
+Finally, we will underscore practical applications across diverse fields, such as differential equations, quantum mechanics, and numerical analysis. By examining these real-world applications, the thesis illustrates the dual role of linear topological spaces in both theoretical frameworks and practical problem-solving approaches. This combination underscores their pivotal importance in advancing our understanding and handling of complex mathematical and physical systems.
+\vfill
+\pagebreak
+
+\section{General Linear Spaces}
+A Linear Space is often referred to as a Vector Space. It contains a set of elements called vectors which can be added together and multiplied by scalars. Scalars are often real numbers, but can be elements of any field.
+\subsection{Introduction}
+\begin{definition}
+    Let $V$ be a \textbf{vector space} over a field $F$ if it is equipped with two operations: vector addition and scalar multiplication, such that the following axioms hold for all $u, v, w \in V$ and scalars $a, b \in F$:\\
+(1) $(u + v) + w = u + (v + w)$\\
+(2) $u + v = v + u$\\
+(3) There exists a vector $0 \in V$ such that $v + 0 = v \quad \text{for all} \quad v \in V$\\
+(4) For every $v \in V$, there exists a vector $-v \in V$ such that: $v + (-v) = 0$\\
+(5) $a  (u + v) = a  u + a  v$\\
+(6) $(a + b)  v = a  v + b  v$\\
+(7) $(a  b)  v = a  (b  v)$\\
+(8) $1  v = v \quad \text{for all} \quad v \in V$\\
+
+For $x,y \in V \text{ and } \alpha \in \dF$, $x+y$ is the \textbf{sum}, and $\alpha  y$ is the \textbf{product}.
+\end{definition}
+\begin{comment}
+In the following, we give a few examples of vector spaces that we use in the future.
+\begin{example}[Vector Space $ \dR^n $]
+Consider the vector space $\dR^n $, where vectors are ordered $n$-tuples $(a_1, a_2, \dots, a_n) \in \dR^n $ and scalars $ \alpha \in \dR $. Let's verify the eight properties of a vector space for $ \dR^n $. Before checking the 8 properties of a vector space, let's ensure the closure under addition and multiplication.\\
+\textbf{Closure under addition}: 
+    
+    For any vectors $ u = (a_1, a_2, \dots, a_n) \in \dR^n $ and $ v = (b_1, b_2, \dots, b_n) \in \dR^n $, define their sum:
+    \[
+    u + v = (a_1 + b_1, a_2 + b_2, \dots, a_n + b_n) \in \dR^n
+    \]
+    This shows that $ \dR^n $ is closed under addition.
+    
+    \item \textbf{Closure under scalar multiplication}: 
+    
+    For any vector $ u = (a_1, a_2, \dots, a_n) \in \dR^n $ and scalar $ \alpha \in \dR $, define scalar multiplication:
+    \[
+    \alpha \cdot u = (\alpha a_1, \alpha a_2, \dots, \alpha a_n) \in \dR^n
+    \]
+    Hence, $ \dR^n $ is closed under scalar multiplication.
+\begin{enumerate}
+    \item \textbf{Associativity of addition}: 
+    
+    For any vectors $ u = (a_1, a_2, \dots, a_n) $, $ v = (b_1, b_2, \dots, b_n) $, and $ {w = (c_1, c_2, \dots, c_n) \in \dR^n }$:
+    \[
+    (u + v) + w = u + (v + w) = (a_1 + b_1 + c_1, \dots, a_n + b_n + c_n)
+    \]
+    Hence, addition is associative in $ \dR^n $.
+
+    \item \textbf{Commutativity of addition}: 
+    
+    For any vectors $ u = (a_1, a_2, \dots, a_n) $ and $ v = (b_1, b_2, \dots, b_n) \in \dR^n $:
+    \[
+    u + v = (a_1 + b_1, a_2 + b_2, \dots, a_n + b_n) = v + u
+    \]
+    Therefore, addition is commutative in $ \dR^n $.
+
+    \item \textbf{Existence of additive identity}: 
+    
+    The zero vector in $ \dR^n $ is defined as $ {0 = (0, 0, \dots, 0) \in \dR^n} $, and for any vector ${ u = (a_1, a_2, \dots, a_n) \in \dR^n }$:
+    \[
+    u + 0 = (a_1, a_2, \dots, a_n) + (0, 0, \dots, 0) = (a_1, a_2, \dots, a_n)
+    \]
+    Therefore, $ 0 $ is the additive identity.
+
+    \item \textbf{Existence of additive inverses}: 
+    
+    For any vector $ u = (a_1, a_2, \dots, a_n) \in \dR^n $, the additive inverse is $ -u = (-a_1, -a_2, \dots, -a_n) $, and:
+    \[
+    u + (-u) = (a_1, a_2, \dots, a_n) + (-a_1, -a_2, \dots, -a_n) = (0, 0, \dots, 0)
+    \]
+    Thus, every vector in $ \dR^n $ has an additive inverse.
+
+    \item \textbf{Distributivity of scalar multiplication with respect to vector addition}: 
+    
+    For any vectors $ u = (a_1, a_2, \dots, a_n) $, $ v = (b_1, b_2, \dots, b_n) \in \dR^n $ and scalar $ \alpha \in \dR $:
+\begin{align*}
+    \alpha \cdot (u + v) &= \alpha \cdot (a_1 + b_1, a_2 + b_2, \dots, a_n + b_n) \\
+    &= (\alpha a_1 + \alpha b_1, \dots, \alpha a_n + \alpha b_n) \\
+    &= (\alpha a_1, \alpha a_2, \dots, \alpha a_n) + (\alpha b_1, \alpha b_2, \dots, \alpha b_n) \\
+    &= \alpha \cdot u + \alpha \cdot v
+\end{align*}
+    Thus, distributivity holds.
+
+    \item \textbf{Distributivity of scalar multiplication with respect to scalar addition}: 
+    
+    For any vector $ u = (a_1, a_2, \dots, a_n) \in \dR^n $ and scalars $ \alpha, \beta \in \dR $:
+    
+\begin{align*}
+    (\alpha + \beta) \cdot u &= ((\alpha + \beta) a_1, (\alpha + \beta) a_2, \dots, (\alpha + \beta) a_n) \\
+    &= (\alpha a_1 + \beta a_1, \alpha a_2 + \beta a_2, \dots, \alpha a_n + \beta a_n) \\
+    &= \alpha \cdot u + \beta \cdot u
+\end{align*}
+    Therefore, distributivity holds with respect to scalar addition.
+    \item \textbf{Associativity of scalar multiplication}: 
+    
+    For any vector $ u = (a_1, a_2, \dots, a_n) \in \dR^n $ and scalars $ \alpha, \beta \in \dR $:
+\begin{align*}
+    (\alpha \cdot \beta) \cdot u &= (\alpha \cdot \beta) (a_1, a_2, \dots, a_n) \\
+    &= (\alpha \beta a_1, \alpha \beta a_2, \dots, \alpha \beta a_n) \\
+    &= \alpha \cdot (\beta a_1, \beta a_2, \dots, \beta a_n) \\
+    &= \alpha \cdot (\beta \cdot u)
+\end{align*}
+
+    Thus, scalar multiplication is associative.
+
+    \item \textbf{Multiplicative identity of scalar multiplication}: 
+    
+    For any vector $ u = (a_1, a_2, \dots, a_n) \in \dR^n $, the multiplicative identity is 1:
+    \[
+    1 \cdot u = (1 \cdot a_1, 1 \cdot a_2, \dots, 1 \cdot a_n) = (a_1, a_2, \dots, a_n)
+    \]
+    Therefore, scalar multiplication has a multiplicative identity.
+\end{enumerate}
+
+Hence, all 8 properties of a vector space are satisfied in $ \dR^n $.
+\end{example}
+
+Before diving into the details of vector spaces, its important to understand some functional spaces. One such space is $ C^n([a, b]) $, the space of functions that are continuously differentiable up to order $ n $ on a given interval.
+
+\begin{example} Space of $n$-times Continuously Differentiable Functions $ C^n([a,b]) $
+
+The space $ C^n([a, b]) $ consists of all functions that are $ n $-times continuously differentiable on the interval $ [a, b] $. This means that functions in this space, along with their first $ n $ derivatives, are continuous on $ [a, b] $.
+
+For instance, let $ C^2([0, 1]) $ be the space of twice continuously differentiable functions on the interval $ [0, 1] $. A function $ f(x) = x^3 + 2x^2 - x $ belongs to $ C^2([0, 1]) $ because both $ f(x) $, $ f'(x) = 3x^2 + 4x - 1 $, and $ f''(x) = 6x + 4 $ are continuous on $ [0, 1] $.
+\end{example}
+
+Another common example of a vector space is $ \ell^2 $, the space of square-summable sequences. These are infinite sequences of numbers where the sum of the squares of the terms is finite.
+
+\begin{example} Space of Square-summable Sequences $ \ell^2 $
+
+The space $ \ell^2 $ consists of all infinite sequences $ (a_1, a_2, a_3, \dots) $ of real or complex numbers such that the sum of the squares of the sequence elements is finite, i.e.,
+
+\[
+\ell^2 = \left\{ (a_1, a_2, \dots) \mid \sum_{i=1}^\infty |a_i|^2 < \infty \right\}
+\]
+
+For instance, the sequence $ \left( \frac{1}{n^2} \right) = \left( 1, \frac{1}{4}, \frac{1}{9}, \dots \right) $ belongs to $ \ell^2 $, since the sum
+
+\[
+\sum_{n=1}^\infty \left| \frac{1}{n^2} \right|^2 = 1 + \frac{1}{16} + \frac{1}{81} + \dots
+\]
+
+converges to a finite value.
+\end{example}    
+
+\begin{example} Consider the function $ f(x) = \frac{1}{\sqrt{x}} $ defined on the interval $ [1, 2] $. This function belongs to $ L^2([1, 2]) $, since
+
+\[
+\int_1^2 \left| \frac{1}{\sqrt{x}} \right|^^2 \, dx = \int_1^2 \frac{1}{x} \, dx = \ln(2) - \ln(1) = \ln(2)
+\]
+
+is finite. Therefore, $ f(x) \in L^2([1, 2]) $.
+\end{example}
+
+
+\begin{example} Consider the function $ f(x) = \frac{1}{\sqrt{x}} $ defined on the interval $ [1, 2] $. This function belongs to $ L^2([1, 2]) $, since
+
+\[
+\int_1^2 \left| \frac{1}{\sqrt{x}} \right|^^2 \, dx = \int_1^2 \frac{1}{x} \, dx = \ln(2) - \ln(1) = \ln(2)
+\]
+
+is finite. Therefore, $ f(x) \in L^2([1, 2]) $.
+\end{example}
+
+\end{comment}
+\begin{remark}
+Consider the space $L^p[a, b]$ of $p$-integrable functions, where $1 \leq p < \infty$. The vector addition and scalar multiplication are defined as follows:
+\[
+(f+g)(x) = f(x) + g(x), \quad (af)(x) = a f(x),
+\]
+for $f, g \in L^p[a, b]$ and $a \in \dR$. To confirm that $L^p[a, b]$ forms a vector space, we verify two key properties:
+
+\begin{enumerate}
+    \item \textbf{Closure under addition:} If $f, g \in L^p[a, b]$, then the function $(f+g)(x) = f(x) + g(x)$ satisfies the inequality
+    \[
+    \int_a^b |f+g|^p(x) \, dx \leq \int_a^b 2^{p-1}(|f|^p(x) + |g|^p(x)) \, dx.
+    \]
+    Since the right-hand side is finite when $f, g \in L^p[a, b]$, we conclude that $f+g \in L^p[a, b]$.
+
+    \item \textbf{Closure under scalar multiplication:} If $f \in L^p[a, b]$ and $a \in \dR$, then the function $(af)(x) = a f(x)$ satisfies
+    \[
+    \int_a^b |af|^p(x) \, dx = |a|^p \int_a^b |f|^p(x) \, dx.
+    \]
+The integral on the right-hand side is finite when $f \in L^p[a, b]$. Thus, $af \in L^p[a, b]$.
+\end{enumerate}
+
+These properties confirm that $L^p[a, b]$ satisfies the vector space axioms.
+\end{remark}
+
+The follwing is another useful example that will be used through out this paper.
+\begin{remark}
+Consider the space $C([a, b])$ of continuous functions on $[a, b]$. The vector addition and scalar multiplication are defined as follows:
+\[
+(f+g)(x) = f(x) + g(x), \quad (af)(x) = a f(x),
+\]
+for $f, g \in C([a, b])$ and $a \in \dR$. To confirm that $C([a, b])$ forms a vector space, we verify two key properties:
+
+\begin{enumerate}
+    \item \textbf{Closure under addition:} If $f, g \in C([a, b])$, then the sum $(f+g)(x) = f(x) + g(x)$ is continuous on $[a, b]$. Since the sum of two continuous functions is also continuous, we have $f+g \in C([a, b])$.
+    
+    \item \textbf{Closure under scalar multiplication:} If $f \in C([a, b])$ and $a \in \dR$, then the function $(af)(x) = a f(x)$ is continuous on $[a, b]$. Since the product of a scalar and a continuous function remains continuous, we have $af \in C([a, b])$.
+\end{enumerate}
+
+These properties confirm that $C([a, b])$ satisfies the vector space axioms.
+\end{remark}
+
+We now turn our attention to the space of polynomials, which is another fundamental example of a vector space:
+
+\begin{remark}
+Consider the vector space $P(F)$, which consists of all polynomials with coefficients in a field $F$. A polynomial $p(x) \in P(F)$ is of the form
+\[
+p(x) = a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n,
+\]
+where $a_i \in F$ and $n \geq 0$. The vector addition and scalar multiplication are defined as follows:
+\[
+(p+q)(x) = p(x) + q(x), \quad (a p)(x) = a p(x),
+\]
+for $p, q \in P(F)$ and $a \in F$. 
+
+\begin{enumerate}
+    \item \textbf{Closure under addition:} If $p, q \in P(F)$, then their sum $(p+q)(x) = p(x) + q(x)$ is also a polynomial in $P(F)$, as the sum of two polynomials results in a polynomial with coefficients in $F$.
+
+    \item \textbf{Closure under scalar multiplication:} If $p \in P(F)$ and $a \in F$, then the scalar multiple $(ap)(x) = a p(x)$ is also a polynomial in $P(F)$, as the product of a scalar and a polynomial results in a polynomial with coefficients in $F$.
+\end{enumerate}
+
+These properties confirm that $P(F)$ satisfies the vector space axioms.
+\end{remark}
+
+
+\subsection{Subspace}
+A subspace is essentially a subset of a vector space that also forms a vector space under the same operations. Subspaces help us analyze the structure of vector spaces by focusing on smaller, yet still valid, vector spaces within a larger one.
+
+\begin{definition}
+    A subset $W$ of a vector space $V$ over a field $\dF$ is a \textbf{subspace} of $V$ if $W$ is a vector space over $\dF$ with the same operations of addition and scalar multiplication defined in $V$.
+\end{definition}
+
+\begin{example}
+    Let $F_1, F_2$ be fields. Let $g \in \mathscr{F} (F_1, F_2)$ be a function. The set of all even functions and the set of all odd functions are subspaces of $\mathscr{F} (F_1, F_2)$.\\
+    \textbf{Check:}\\
+    Let $A$ be the set of all even functions. Let $f, g \in A$.\\
+    By definition: $g(-x) = g(x)$ and $f(-x) = f(x)$ $\forall x \in F_1$\\
+    Consider:\\
+    \tabb $a.g(-x) + f(-x) = a.g(x)+f(x) \in A$\\
+    Hence, $A$ is a vector space of $V$.
+
+    Let $B$ be the set of all odd functions. Let $f, g \in B$.\\
+    By definition: $g(-x) = -g(x)$ and $f(-x) = f(x)$ $\forall x \in F_1$\\
+    Consider:\\
+    \tabb $a.g(-x) + f(-x) = a.(-g(x))+-f(x) = -(a.g(x)+f(x)) \in B$\\
+    Hence, $B$ is a vector space of $V$.    
+\end{example}
+
+After defining a subspace, it's important to establish conditions that help identify subspaces within vector spaces. The following theorem provides a criterion for determining whether a subset of a vector space is a subspace.
+
+\begin{theorem}
+    A subset $W$ of a vector space $V$ over a field $\dF$ is a subspace of $X$ if and only if $0 \in W$ and $ax+y \in W$ $\forall a \in F$ and $x,y \in W$.
+\end{theorem}
+
+\begin{proof}
+
+\textbf{\textit{Claim: If $ 0 \in W$ and $ax+y \in W$ $\forall a \in F$ and $x,y \in W$, then $W \in V$ is a subspace of $V$}}
+    
+    Suppose $0 \in W$ and $ax+y \in W$ $\forall a \in F$ and $x,y \in W$
+    
+    $0 \in W \longrightarrow W \neq \emptyset$ 
+    
+    $ax+y \in W$ $\forall a \in F$ and $x,y \in W$
+    
+    $\longrightarrow W$ is closed under operations of addition and scalar multiplication in $V$.
+    
+    \textbf{\textit{Claim: If $W \in V$ is a subspace of $V$, then $0 \in W$ and $ax+y \in W$ $\forall a \in F$ and $x,y \in W$}}
+
+    Suppose $W \in V$ is a subspace of $V$. Then, $W$ is also a linear space. 
+    
+    Therefore, by definition, $0 \in W$ and $ax+y \in W$ $\forall a \in F$ and $x,y \in W$.
+\end{proof}
+To understand the relationship between subspaces, it's useful to explore conditions under which the union of two subspaces forms another subspace. The following theorem provides the necessary and sufficient condition for when the union of two subspaces is itself a subspace.
+\begin{theorem}
+    Let $W_1, W_2$ be subspaces of a vector space $X$. \\
+    $W_1 \cup W_2$ is a subspace of $V$ if and only if $W_1 \subseteq W_2$ or $W_2 \subseteq W_1$.
+\end{theorem}
+
+\begin{proof} \hfill\\
+\textbf{\textit{Claim: If $W_1 \subseteq W_2$ or $W_2 \subseteq W_1$, then $W_1 \cup W_2$ is a subspace of V.}}
+   
+    WLOG, we assume that $W_1 \subseteq W_2$.
+    
+    Thus, $W_1 \cup W_2 = W_2$ is a subspace of $V$.\\    
+ \textbf{\textit{Claim: If $W_1 \cup W_2$ is a subspace of V, then $W_1 \subseteq W_2$ or $W_2 \subseteq W_1.$} }
+    
+    Suppose that $W= W_1 \cup W_2$ is a subspace of V. Take some $a, b \in W$.
+    
+    WLOG, assume $a,b \in W_1$. Now consider, $c \in W$, in particular, $c \in W_2$.
+    
+    Because $W$ is a subspace of $V$, then $ \exists \alpha, \beta \in \dF \text{ such that } \alpha a+ \beta b = c \in W_2$.
+    
+    Thus, $a, b \in W_2$. Therefore, $W_1 \subseteq W_2$.
+    
+    Similarly, we can prove that $W_2 \subseteq W_1$.
+    
+    Hence, $W_1 \subseteq W_2$ or $W_2 \subseteq W_1$.
+\end{proof}
+\begin{comment}
+The sum of two subsets in a vector space combines elements from both subsets. The following definition formalizes this concept.
+\begin{definition}
+    If $S_1, S_2$ are nonempty subsets of a vector space $V$, then the \textit{sum} of $S_1, S_2$ is defined as $S_1 + S_2 = \{x+y : x \in S_1, y \in S_2\}$
+\end{definition}
+
+The direct sum is a special way of combining subspaces, ensuring no overlap beyond the zero vector. The following definition explains when a vector space is the direct sum of two subspaces.
+\begin{definition}
+    A vector space $V$ is called the \textit{direct sum} of $W_1$ and $W_2$ if $W_1, W_2$ are subspaces of $V$ such that:
+    \begin{itemize}
+        \item {$W_1 \bigcap W_2 = \{0\}$}
+        \item {$W_1 + W_2 = V$}
+    \end{itemize}
+    
+    Denote: $V = W_1 \bigoplus W_2$
+\end{definition}
+
+The intersection of subspaces retains the structure of a vector space. The following lemma states this property.
+\begin{lemma}
+    The intersection of a collection of subspaces is also a vector space.
+\end{lemma}
+
+\begin{proof}
+Let $W_i for I \in A$ be subspaces of V.
+
+The intersection of $W_i$ is denoted as: $W = \bigcap_{i \in A} W_i$
+
+We know that $0 \in W_i \forall i$. So, $0 \in W$.
+
+Consider for any $a, b \in W$ and $\alpha \in \dF$. Then, $a,b \in W_i \forall i$.
+
+But for every $i, W_i$ is a subspace of V, so we have:
+$$T(\alpha a + b) = \alpha T(a) + T(b)$$
+
+In other words, for any $a, b \in W_i \forall i$ and $\alpha \in \dF$, $T(\alpha a + b) = \alpha T(a) + T(b)$.
+
+Hence, $W$ is a subspace of $V$.
+\end{proof}
+\end{comment}
+
+
+\subsection{Operations on a Linear Space}
+Operations in a linear space, including vector addition and scalar multiplication, follow properties like commutativity, associativity, and distributivity, forming the foundation for combining and scaling vectors while maintaining the vector space's structure.
+
+An important property of a linear space is Linear Independence. A set of vectors is said to be linearly independent if no vector can be deduced from the others.
+    \begin{definition}
+        A subset $E = \{x_1, x_2,..., x_n\}$ of a linear space $X$ is said to be \textit{linearly independent} if:
+        $$
+        {\lambda_1}x_1+{\lambda_2}x_2 +...+{\lambda_n}x_n = 0 \text{if and only if} \lambda_1 = \lambda_2 = ... = \lambda_n
+        $$
+    \end{definition}
+    
+    \begin{definition}
+        Let $E$ be a subset of the linear space $X$. The \textit{span} of $E$, $span(E)$, is the set of all finite linear combinations of vectors in $E$:\\
+        $$
+        span(E)= \{\sum_{i=1}^{n} {\lambda_i}x_i : n \in \dN, x_i \in E, \lambda_i \in \dF \}
+        $$
+    \end{definition}
+    
+Such a span is called the intersection of all linear subspace or the smallest subspace containing $E$. It is also a linear space.
+
+A linear transformation is a function between vector spaces that preserves addition and scalar multiplication, maintaining the vector space structure. It is fundamental in applications like solving linear systems, computer graphics, quantum mechanics, and data analysis, and is closely related to matrix theory, eigenvalues, and subspaces.
+
+    \begin{definition}
+        T is called a \textit{linear transformation} from the linear space $X$ to a linear space $Y$ over a scalar field $\dF$ is a function that satisfies:    
+        \[ T(\alpha x +\beta y) = \alpha T(x) + \beta T(y) \]      
+        where $\alpha, \beta \in \dF$ and $x,y \in X$
+    \end{definition}
+
+\begin{comment}
+
+    \begin{example}
+    Let $T: \dR^2 \to \dR^2$ be a transformation defined by the matrix:
+
+$$
+T\left( \begin{pmatrix} x \\ y \end{pmatrix} \right) = \begin{pmatrix} 2x \\ 3y \end{pmatrix}
+$$
+
+In this case, for any vector $v = \begin{pmatrix} x \\ y \end{pmatrix}$ in $\dR^2$, the transformation $T$ scales the $x$-coordinate by 2 and the $y$-coordinate by 3. 
+
+This transformation is linear because it satisfies:
+
+(1) $T(v_1 + v_2) = T(v_1) + T(v_2)$
+
+(2) $T(a \cdot v) = a \cdot T(v)$ for any scalar $a$.
+
+    \end{example}
+\end{comment}
+
+
+\begin{example}
+    Let \( V \) be the vector space of all real-valued sequences:
+    $$
+    V = \{ (x_n)_{n \in \dN} \mid x_n \in \dR \}.
+    $$
+    Define the linear transformation \( T: V \to V \) by:
+    $$
+    T\left( (x_n)_{n \in \dN} \right) = (n \cdot x_n)_{n \in \dN}.
+    $$
+
+    Here, \( T \) scales the \( n \)-th entry of the sequence \( (x_n) \) by \( n \). To verify that \( T \) is linear, note that for any \( v = (x_n)_{n \in \dN} \) and \( w = (y_n)_{n \in \dN} \) in \( V \), and any scalar \( a \in \dR \):
+    \begin{enumerate}
+        \item \( T(v + w) = T((x_n + y_n)_{n \in \dN}) = (n(x_n + y_n))_{n \in \dN} = (n x_n)_{n \in \dN} + (n y_n)_{n \in \dN} = T(v) + T(w). \)
+        \item \( T(a \cdot v) = T((a x_n)_{n \in \dN}) = (n \cdot a x_n)_{n \in \dN} = a \cdot (n x_n)_{n \in \dN} = a \cdot T(v). \)
+    \end{enumerate}
+
+    Thus, \( T \) is a linear transformation. Note that \( V \) is an infinite-dimensional vector space, as no finite subset of standard basis vectors \( e_n = (0, \dots, 0, 1, 0, \dots) \) (with 1 at the \( n \)-th position) can span \( V \). This provides an example of a linear transformation on an infinite-dimensional linear space.
+\end{example}
+
+This linear transformation can also apply to a set. In other words, it can translate a set $A$ to a set $B$.
+
+    \begin{remark} 
+        Let $X$ be a linear space and $A, B \subset X$. 
+        
+        The algebraic sum $A+B =$ \{all sums $a+b : a \in A, b \in B$\}. 
+        
+        If $x \in X$, the \textit{x-translate} of $A$ is:
+        $$x+A = \{x\}+A = \{x+a : a \in A\}$$
+    \end{remark}
+        
+    \begin{proof}
+        Let $X, Y$ be linear spaces, $x \in X$, $y \in Y$ and $A, B \subset X$. 
+        
+        Define the linear transformation $T: X \Longrightarrow Y$.
+        
+        Suppose $y \in T(\alpha A+B)$, then $\exists x$ such that $y=T(x)$. We have:
+        $$
+        y= T(x)=T(\alpha a+ b)= \alpha T(a) + T(b)
+        \in \alpha T( A) +T(B)
+        $$
+        for some $a \in A, b \in B, \alpha \in \dF$. Hence, $T(\alpha A+B) \subset \alpha T( A) +T(B)$.\\
+        
+        Suppose $y \in \alpha T(A) +T(B)$, we have:
+        $$y = \alpha T(a)+ T(b) = T(\alpha a +b) \in T(\alpha A+B)$$
+        
+        for some $a \in A, b \in B, \alpha \in \dF$. Hence, $\alpha T( A) +T(B) \subset T(\alpha A+B) $. Therefore, ${T(\alpha A+B) = \alpha T( A) +T(B)}$
+    \end{proof}
+\begin{comment}
+\begin{example}
+    Consider the vector space \( P \) of all polynomials with real coefficients. Define the linear transformation \( T: P \to P \) by:
+    $$
+    T(p(x)) = p'(x),
+    $$
+    where \( p'(x) \) is the derivative of \( p(x) \). For example, if \( p(x) = 2 + 3x + 4x^2 \), then:
+    $$
+    T(p(x)) = p'(x) = 3 + 8x.
+    $$
+
+    This transformation is linear because it satisfies:
+    \begin{enumerate}
+        \item \( T(p_1(x) + p_2(x)) = T(p_1(x)) + T(p_2(x)) \) (the derivative of a sum is the sum of the derivatives).
+        \item \( T(\alpha \cdot p(x)) = \alpha \cdot T(p(x)) \) for any scalar \( \alpha \) (the derivative of a scalar multiple is the scalar multiple of the derivative).
+    \end{enumerate}
+
+    Note that \( P \) is an infinite-dimensional vector space, as no finite subset of the standard basis \( \{1, x, x^2, x^3, \dots\} \) can span \( P \). Thus, this provides an example of a linear transformation on an infinite-dimensional linear space.
+\end{example}    
+\end{comment}    
+
+
+\begin{comment}\begin{example}
+Consider the polynomial $p(x) = 2 + 3x + 4x^2$, we have:
+\[T(p(x)) = p'(x) = 3 + 8x\]
+This transformation is linear because it satisfies:
+
+(1) $T(p_1(x) + p_2(x)) = T(p_1(x)) + T(p_2(x))$ (the derivative of a sum is the sum of the derivatives).
+
+(2) $T(\alpha \cdot p(x)) = a \cdot T(p(x))$ for any scalar $\alpha$ (the derivative of a scalar multiple is the scalar multiple of the derivative).
+\end{example} \end{comment}
+
+
+\begin{comment}
+    
+
+    \begin{definition}
+        Let $X, Y$ be linear spaces.
+        
+        Define $T: X \Longrightarrow Y$ to be a linear transformation
+         $$x \longrightarrow T(x)$$
+        
+        Then we define the \textit{nullspace} of $T$ to be: $null(T) = \{x \in X | T(x) = 0_Y\}$
+    \end{definition}
+    
+    \begin{example}
+        Let $A$ be a matrix:
+\[
+A = \begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6
+\end{pmatrix}
+\]
+The null space of $A$, denoted as $\text{Null}(A)$, consists of all vectors $x = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}$ such that:
+\[
+A \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}
+\]
+This gives the system of linear equations:
+\[
+1x_1 + 2x_2 + 3x_3 = 0
+\]
+\[
+4x_1 + 5x_2 + 6x_3 = 0
+\]
+Solving this system yields the null space:
+\[
+\text{Null}(A) = \left\{ \begin{pmatrix} -1 \\ 2 \\ -1 \end{pmatrix} \right\}
+\]
+This means the vector $x = \begin{pmatrix} -1 \\ 2 \\ -1 \end{pmatrix}$ is in the null space of $A$.
+
+    \end{example}
+\end{comment}
+
+\vfill
+\subsection{Dimension of a Vector Space}
+The dimension of a vector space refers to the number of vectors in its basis, which is a minimal set of linearly independent vectors that span the space. It provides a measure of the space's size or complexity. In finite-dimensional spaces, this number is always finite, but in infinite-dimensional spaces, it can be infinite.
+
+    \begin{definition}
+    A \textit{basis} $\beta$ of a vector space $V$ is a linearly independent subset of $V$ that generates $V$. We say the vectors of $\beta$ form a basis for $V$.
+    \end{definition}
+
+    \begin{example}
+        It's obvious to see that the set $\beta =\{1, x, x^2, x^3,...\}$ is a basis in $P(F)$ because their linear combinations could form any element $f(x)$ in $P(F)$.
+    \end{example}
+
+    \begin{definition}
+        A vector space is called \textit{finite-dimensional} if it has a basis consisting of a finite number of vectors. Then every basis of $V$ consists of exactly $n$ vectors where $n$ is the \textit{dimension} of $V$. Denote: $n = dim(v)$.\\
+        \tabb If a vector space is not finite-dimensional, then it is \textit{infinite-dimensional}
+    \end{definition}
+
+    \begin{example}
+        The vector space $M_{m\times n}(F)$ has dimension $mn$.
+    \end{example}
+
+    \begin{example}
+    Consider the vector space \( V = \dR[x] \), the set of all polynomials with real coefficients. A general element of \( V \) can be written as:
+    $$
+    p(x) = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n,
+    $$
+    where \( a_0, a_1, \dots, a_n \in \dR \) and \( n \) can vary for each polynomial. The addition of two polynomials and scalar multiplication are defined in the usual way:
+    \begin{itemize}
+        \item \( (p + q)(x) = p(x) + q(x) \),
+        \item \( (\alpha \cdot p)(x) = \alpha \cdot p(x) \), for \( \alpha \in \dR \).
+    \end{itemize}
+
+    This space is infinite-dimensional because no finite subset of the standard basis \( \{1, x, x^2, x^3, \dots\} \) can span \( V \). Specifically, for any finite-dimensional subspace \( U \subseteq V \), there always exists a polynomial \( p(x) \notin U \), such as one of higher degree.
+
+    Thus, \( V \) serves as a classical example of an infinite-dimensional vector space.
+    \end{example}
+
+
+The following theorem is foundational in linear algebra and deals with the relationship between the size of generating sets and linearly independent sets in finite-dimensional vector spaces.
+    
+    \begin{theorem}[Steinitz Exchange Theorem] \hfill \\
+Let $V$ be a vector space with dimension $n$.
+
+\begin{itemize}
+    \item (1) Any linearly independent set of vectors in $V$ can be extended to a basis of $V$. That is, if $L$ is a linearly independent set, then there exists a basis $\beta$ of $V$ such that $L \subseteq \beta$.
+    
+    \item (2) Any generating set (spanning set) of $V$ can be reduced to a basis of $V$. In other words, if $S$ is a generating set of $V$, then a subset of $S$ forms a basis of $V$.
+    
+    \item (3) Every basis of $V$ contains exactly $n$ vectors, where $n$ is the dimension of $V$. Any linearly independent set of vectors that contains exactly $n$ elements is a basis of $V$.
+\end{itemize}
+    \end{theorem}
+
+\begin{proof}
+Let $V$ be a vector space with dimension $n$.
+
+\textbf{(1)} Suppose $L = \{v_1, v_2, \dots, v_k\}$ is a linearly independent set in $V$. We need to show that $L$ can be extended to a basis $\beta$ of $V$. Since $L$ is linearly independent, we can iteratively add vectors $v_{k+1}, v_{k+2}, \dots$ from $V$ to $L$ such that the extended set remains linearly independent. As $V$ is $n$-dimensional, we can extend $L$ to a linearly independent set $\beta$ of size $n$, which is a basis of $V$.
+
+\textbf{(2)} Suppose $S = \{w_1, w_2, \dots, w_m\}$ is a generating set of $V$. Since $V$ is $n$-dimensional, any generating set must contain at least $n$ vectors, and a basis of $V$ contains exactly $n$ vectors. By removing vectors from $S$, if necessary, while ensuring the remaining set is still a generating set, we can reduce $S$ to a subset $\beta$ of exactly $n$ vectors, which forms a basis of $V$.
+
+\textbf{(3)} Let $\beta = \{u_1, u_2, \dots, u_n\}$ be a basis of $V$. Since $\beta$ is a basis, it is linearly independent and spans $V$. Any other basis of $V$ must also be linearly independent and span $V$. By the definition of dimension, any linearly independent set containing $n$ elements in $V$ must be a basis of $V$, as it spans the entire space.
+\end{proof}
+
+This corollary establishes that a generating set or a linearly independent set matching the vector space's dimension forms a basis and that any linearly independent set can be extended to a basis.
+    \begin{corollary}
+    Let $V$ be a vector space with dimension $n$.\\
+    (1) Any finite generating set of $V$ contains at least $n$ vectors. A generating set of $V$ that contains exactly $n$ vectors is a basis of $V$.\\
+    (2) Any linearly independent set of $V$ that contains $n$ vectors is a basis of $V$.\\
+    (3) Every linearly independent set of $V$ can be extended to a basis of $V$: if $L$ is a linearly independent subset of $V$, then there is a basis $\beta$ such that $L \subseteq \beta$.
+    \end{corollary}
+
+    \begin{proof} \hfill \\
+        (1) Let $A$ be a generating set of $V$, $B \subseteq A$, and $B$ is a basis of $V$.\\
+        Since $|B| = n$, $|A| \geq n$.\\
+        \tabb If $|A|=n$, then $A = B$. Thus, $A$ is a basis of $V$.\\
+        \\
+        (2) Let $A$ be a linearly independent subset of $V$ that contains exactly $n$ vectors.\\
+        By the Replacement Theorem, there exist a subset $B$ of $V$ containing $n-n=0$ vectors such that $A \cup B$ generates $V$.\\
+        Hence, $B= \emptyset$ and $A$ generates $V$.\\
+        \tabb By part (1), $A$ is a basis of $V$.\\
+        \\
+        (3) Let $L$ be a linearly independent subset of $V$ containing $m$ vectors, and $\beta$ be a basis of $V$ containing $n$ vectors.\\
+        By the Replacement Theorem, there exists $H \subseteq \beta$ containing $n-m$ vectors such that $L \cup H$ generates $V$.\\
+        But $L \cup H$ contains at most $n$ vectors.\\
+        \tabb By part (1), $L \cup H$ contains exactly $n$ vectors and it is a basis of $V$.
+    \end{proof}
+
+
+\begin{comment}
+Two vector spaces are the same if they have the same dimension and basis.
+Understanding the relationship between a vector space and its subspaces is crucial, as subspaces inherit properties like dimensionality from the larger space. A key theorem states that any subspace of a finite-dimensional vector space is also finite-dimensional and provides conditions for when a subspace equals the entire space.
+    
+    \begin{theorem}
+        Let $W$ be a subspace of a finite-dimensional vector space $V$. Then:\\
+        (1) $W$ is also finite-dimensional and $dim(W) \leq dim(V)$. \\
+        (2) If $dim(W) = dim(V)$, then $W=V$
+    \end{theorem}
+    \begin{proof} \hfill \\
+        (1) Let $dim(V)=n$. If $W={0}$, then $dim(W)=0 \leq n$.\\
+        Otherwise, $W$ contains a nonzero vector $w_1$ and $\{w_1\}$ is a linearly independent set.\\
+        Choose vectors $w_1,..., W_k$ such that $\{w_1,...,w_k\}$ is linearly independent.\\
+        Any linearly independent set of $V$ contains at most $n$ vector because $dim(V)=n$.\\
+        So $k \leq n$ and $\{w_1,...,w_k\}$ is linearly independent but adjoining any other vector from $W$ would form a linearly dependent set.\\
+        This implies that $\{w_1,...,w_k\}$ generates $W$.\\
+        Thus, it is a basis for $W$.\\
+        \tabb It follows that $dim(W) = k \leq n$.\\
+        \\
+        (2) Suppose $dim(W) = dim(V) =n$.\\
+        Then a basis of $W$ is a linearly independent subset of $V$ containing $n$ vectors.\\
+        This implies it is also a basis for $V$.\\
+        \tabb Hence, $W =V$.
+    \end{proof}    
+\end{comment}
+
+In infinite-dimensional spaces, bases and their dimensions become more nuanced. Depending on the structure of the space, different types of bases, such as the \textit{normal basis} or the \textit{Hamel basis}, are used to describe their properties.\\
+
+\subsubsection{Normal Basis} 
+A \textit{normal basis} is a concept used in the context of fields or vector spaces over fields, often in finite field extensions. While normal bases are less common in general vector spaces, they play an important role in algebraic applications.
+
+\begin{definition}
+A \textit{normal basis} of a vector space \( V \) over a field \( F \) is a basis in which all elements are related in a systematic way, such that every element of \( V \) can be uniquely expressed as a linear combination of the basis elements.
+\end{definition}
+
+\noindent \textbf{Dimensionality:}
+\begin{itemize}
+    \item Normal bases are finite-dimensional when used in finite field extensions.
+    \item Infinite-dimensional normal bases can exist in certain infinite-dimensional spaces.
+\end{itemize}
+
+\begin{example}
+The vector space \( P(F) \) is infinite-dimensional. 
+
+Consider the set of monomials \( \{1, x, x^2, \dots\} \). This set is linearly independent, as no finite linear combination of these elements can produce the zero polynomial unless all coefficients are zero. Moreover, any polynomial \( p(x) \in P(F) \) can be expressed as a finite linear combination of these monomials, demonstrating that they span \( P(F) \). Since this basis is not finite, \( P(F) \) is infinite-dimensional.
+\end{example}
+
+\subsubsection{Hamel Basis}
+The \textit{Hamel basis} is the most general type of basis, defined purely algebraically without requiring any additional structure, such as a norm or inner product.
+\vfill
+\begin{definition}
+A \textit{Hamel basis} of a vector space $V$ is a set of vectors $\{v_i\}_{i \in I}$ such that every vector in $V$ can be expressed uniquely as a finite linear combination of vectors from the basis:
+$$
+v = \sum_{i \in I} a_i v_i, \quad a_i \in F,
+$$
+where $I$ is an indexing set.
+\end{definition}
+
+\noindent \textbf{Dimensionality:}
+\begin{itemize}
+    \item In finite-dimensional spaces, the Hamel basis is finite, with the number of elements equal to the dimension of the space.
+    \item In infinite-dimensional spaces, the Hamel basis can be uncountably infinite, even if the space has other countably infinite bases (e.g., orthonormal basis).
+\end{itemize}
+
+
+\begin{example}
+    In $\mathbb{R}[x]$, the space of all polynomials with real coefficients, $\{1, x, x^2, x^3, \dots\}$ is a Hamel basis. For $\mathbb{R}^\mathbb{N}$, the space of real-valued sequences, the standard unit vectors $e_i = (0, \dots, 0, 1, 0, \dots)$ (with $1$ in the $i$-th position) form a Hamel basis, but this space is infinite-dimensional.
+\end{example}
+
+\begin{example}
+The space $C([a,b])$ has a Hamel basis, which is a (potentially uncountable) set of continuous functions $\{f_\alpha\}_{\alpha \in A}$ such that any $f \in C([a,b])$ can be written uniquely as a finite linear combination:
+\[
+f(x) = \sum_{i=1}^n c_i f_{\alpha_i}(x),
+\]
+where $c_i \in \mathbb{R}$ and $f_{\alpha_i} \in \{f_\alpha\}_{\alpha \in A}$.
+
+However, this basis is not explicitly constructible, as the Axiom of Choice only guarantees its existence. For practical purposes, systems like trigonometric functions $\{1, \sin(nx), \cos(nx)\}_{n \in \mathbb{N}}$ are used as a Schauder basis for $C([a,b])$, allowing infinite series representation.
+\end{example}
+
+
+\pagebreak
+
+\section{General Topological Spaces} 
+A topological space is a fundamental mathematical structure that extends the concept of geometric spaces by introducing a more abstract notion of "closeness" or "continuity" without depending on specific distances. It consists of a set of points along with a collection of open sets that satisfy certain axioms, allowing for the study of properties that remain unchanged under continuous transformations, such as stretching or bending. Topological spaces are crucial in mathematics because they provide a flexible framework for understanding concepts like continuity, convergence, and compactness, extending beyond the limitations of metric spaces. This makes them indispensable in fields such as geometry, analysis, and algebraic topology.
+
+\subsection{Introduction}
+\begin{definition}
+    Let $X$ be a set. A \textit{topology} on $X$ is a collection $\tau$ of subsets of $X$ satisfying the following conditions:
+    \begin{itemize}
+        \item The total set $X$ and the empty set $\emptyset$ are elements of $\tau$;
+        \item If $\{U_\gamma\}_{\gamma \in \Gamma}$ is a (possibly infinite) family of elements of $\tau$, then $\cup_{\gamma \in \Gamma}U_\gamma \in \tau$;
+        \item If $\{U_1, \dots, U_n\} \subseteq \tau$ is a finite family of elements of $\tau$, then $\bigcap_{i=1}^n U_i \in \tau$.
+    \end{itemize}
+    A \textit{topological space} is a pair $(X, \tau)$ where $\tau$ is a topology on $X$.
+\end{definition}
+
+\begin{comment}
+\begin{example}
+    Let $(X, \tau)$ be a topological space where $X = \{1, 2, 3, 4\}$ and 
+    
+    $\tau = \{\emptyset, X, \{1, 2\}, \{2\}, \{1, 2, 3\}, \{2, 3, 4\}, \{3\}\}$.
+
+    Consider the following verifications to show that $\tau$ forms a topology on $X$:
+    
+    (1) Clearly, the total set $X$ and the empty set $\emptyset$ are elements of $\tau$, i.e., $X, \emptyset \in \tau$, which satisfies the first condition of a topology.
+    
+    (2) Next, we check that $\tau$ is closed under arbitrary unions. For instance, the union of $\{1, 2\}$ and $\{2, 3, 4\}$ is $\{1, 2, 3, 4\} = X \in \tau$. Similarly, the union of $\{2\}$ and $\{3\}$ is $\{2, 3\} \notin \tau$, but arbitrary unions can be taken from existing open sets in $\tau$, ensuring closure under union operations.
+    
+    (3) We also check that $\tau$ is closed under finite intersections. For example, the intersection of $\{1, 2, 3\}$ and $\{2, 3, 4\}$ is $\{2, 3\} \notin \tau$, but the intersection of $\{1, 2, 3\}$ and $\{2\}$ is $\{2\} \in \tau$. Finite intersections of other sets in $\tau$ either result in elements of $\tau$ or the empty set, which confirms the closure under intersections.
+    
+    Therefore, $\tau$ satisfies all the conditions to be a topology on $X$. Hence, $(X, \tau)$ is a topological space.
+\end{example}    
+
+
+
+
+Because topological spaces are so abstract, several unexpected and interesting situations can arise when working with them. One particularly striking example is known as \textit{the line with two origins}. This space highlights how topology allows for the construction of spaces that defy our usual geometric intuition. 
+
+In this example, we modify the real line by introducing two distinct points that behave as if they were both origins, resulting in a topological space that is locally indistinguishable from the real line but globally quite different.
+
+\begin{example} [The line with two origins] \hfill \\
+    Let $\dR \cup \{z\}$ and\\
+    (1) $\tau_1 = \{U \subseteq \dR | U$ is open with Euclidean metric\}\\
+    (2) $\tau_2 = \{\emptyset\} \cup \{W=V \cup \{z\}| V \in \tau_1$ such that $\{0\} \notin V\}$.
+    (3) $\tau = \tau_1 \cup \tau_2$. That is there exists an element in $\tau$ that is a union $U \cup W$. This is a topology in $X$ because $\emptyset, X \in \tau$ and $\tau$ is closed under union and intersection.\\
+    This topology has the property: if $A, B \in \tau$ such that\\
+    (i) $0 \in A, z \notin A$; and\\
+    (ii) $x \in B, 0 \notin B$,\\
+    then $A \cap B \neq \emptyset$.\\
+    Therefore, it is impossible to separate 0 from $z$.
+\end{example}
+
+\end{comment}
+
+\begin{comment}
+    \begin{example}
+    Let's consider the same set $X$ with a different $\tau$, say $\tau_0$.\\
+    We have $X=\{1,2,3\}$ and $\tau_0=\{\emptyset, X, \{2\}, \{3\}\}$\\
+    (1): We can see that $\emptyset, X \in \tau_0$.\\
+    (2): $\{2\} \cup \{3\} = \{2,3\} \notin \tau_0$.\\
+    Thus, $\tau_0$ is not a topology. Hence, the pair $(X, \tau_0)$ is not a topological space.
+\end{example}
+
+\end{comment}
+\begin{example}
+    Let X be any set, $\tau_1$ be the collection of all subsets of $X$, and $\tau_2 = \{\emptyset, X\}$.\\
+    Both $\tau_1$ and $\tau_2$ are topologies on $X$. Hence, $(X, \tau_1)$ and $(X, \tau_2)$ are both topological spaces. However, $\tau_1$ and $\tau_2$ represent different types of topologies.\\
+    1. $\tau_1$ is the \textit{discrete topology} on $X$.\\
+    2. $\tau_2$ is the \textit{indiscrete topology} on $X$.\\
+A discrete topology is the only topology on the finite set $X$ that is induced by a metric.
+\end{example}
+
+\begin{example}
+    Let \( X = \dR^\dN \), the set of all sequences of real numbers, and consider the collection \( \tau_0 \) of subsets of \( X \) defined as:
+    $$
+    \tau_0 = \{\emptyset, X, \{x \in X \mid x_n = 0 \text{ for all } n \geq N\}, \{x \in X \mid x_n = 1 \text{ for some fixed } n\}\}.
+    $$
+
+    To check if \( \tau_0 \) is a topology, we examine the following:
+    \begin{enumerate}
+        \item \(\emptyset, X \in \tau_0\): This is satisfied.
+        \item The union of two sets in \( \tau_0 \), say \( \{x \in X \mid x_n = 0 \text{ for all } n \geq N\} \) and \( \{x \in X \mid x_n = 1 \text{ for some fixed } n\} \), is not necessarily in \( \tau_0 \). For example, their union could include sequences not covered by either specific condition, and hence does not belong to \( \tau_0 \).
+    \end{enumerate}
+
+    Thus, \( \tau_0 \) is not a topology, and the pair \( (X, \tau_0) \) is not a topological space.
+
+    Note that \( X = \dR^\dN \) is an infinite-dimensional space, as it consists of all real-valued sequences, which cannot be spanned by any finite basis.
+\end{example}
+
+
+\subsection{Openness and Closeness}
+A fundamental approach to studying topology is through the concept of openness. Without the notion of open sets, it would not be possible to define a topology on a space. Openness generalizes key concepts such as continuity, compactness, and convergence to more abstract settings. This definition allows us to explore spaces that are not necessarily geometric or Euclidean, yet still exhibit a rich and meaningful structure.
+
+\begin{definition}[Openness] \hfill\\
+A set is called \textbf{open} in a topological space if, for each point in the set, there exists a neighborhood of that point entirely contained within the set. Formally, a set $U$ is open in a topological space $(X, \tau)$ if $U \in \tau$, where $\tau$ is the topology on $X$ (the collection of open sets).
+\end{definition}
+
+\begin{example}[Discrete Topology] \hfill\\
+Consider the \textbf{discrete topology} on any set $X$, which means every subset of $X$ is open. Let's take $X = \{a, b, c\}$. In the discrete topology, the set $\{a\}$ is open because every subset of $X$ is open by definition. This is an example of an open set in a discrete topological space.
+\end{example}
+
+On the other hand, closedness is the complementary approach that brings a more complete understanding of topological spaces. It is a fundamental concept in topology, defined as the complement of an open set in a given topological space. A set is closed if it contains all its limit points, meaning sequences or nets that converge within the set cannot "escape" it. This property is crucial for studying convergence, compactness, and the overall structure of spaces in topology.
+
+\begin{definition}[Closedness]  \hfill\\
+A set is called \textbf{closed} in a topological space if its complement (with respect to the entire space) is open. In other words, a set $A$ is closed in $(X, \tau)$ if $X \setminus A$ is an open set.
+\end{definition}
+
+\begin{example}[Finite Complement Topology]  \hfill\\
+Consider the \textbf{finite complement topology} on an infinite set $X$, where open sets are defined as either $X$ itself or any set whose complement is finite. Let $X = \mathbb{Z}$, the set of integers. The set $A = \mathbb{Z} \setminus \{1, 2, 3\}$ is closed because its complement $\{1, 2, 3\}$ is finite, and hence, open in the finite complement topology.
+\end{example}
+
+Even though openness and closedness are complementary concepts, there are sets that are both open and closed, and these sets are referred to as \textit{clopen} sets. Clopen sets are important because they illustrate that being open and closed are not necessarily mutually exclusive properties.
+\begin{example} 
+Consider the discrete topology on the set $X = \{1, 2, 3\}$, where every subset of $X$ is open. In this case, the set $X$ itself (i.e., $\{1, 2, 3\}$) is both open and closed. This is because in the discrete topology, every subset is open, and the entire space $X$ is always both open and closed in any topology.
+\end{example}
+
+Another case to consider is a set that is neither open nor closed. This occurs when the set does not satisfy the conditions for either openness or closedness in a given topological space. Such sets are important for understanding limits, boundaries, and other topological properties, demonstrating that open and closed sets are just part of a broader range of possible behaviors within a space.
+\pagebreak
+\begin{example}
+In the real numbers $\dR$, consider the interval $[0, 1)$. This set is neither open nor closed:
+\begin{itemize}
+    \item It is \textbf{not open} because the point $0$ does not have a neighborhood entirely contained within $[0, 1)$.
+    \item It is \textbf{not closed} because it does not contain the limit point $1$ (its closure is $[0, 1]$).
+\end{itemize}
+\end{example}
+\begin{comment}
+    Open Graph Theorem and Closed Graph Theorem are two important results of these definitions in Linear Topological Space, which we discuss in the next section. They illustrate how openness and closedness govern the behavior of mappings in topological and functional analytic contexts.
+
+\end{comment}
+
+
+\subsection{Continuity}
+Continuity in topology studies how functions preserve the structure of spaces without abrupt changes, using open sets rather than specific distances. This abstract approach applies to a wider range of spaces, enabling the exploration of convergence, compactness, and connectedness, and is essential in analysis, geometry, and algebraic topology.
+
+\begin{definition}
+    A function $f: X \to Y$ between two sets is said to be \emph{continuous} if small changes in the input result in small changes in the output. 
+    
+    More precisely, in the context of metric spaces, a function $f$ is continuous if for every $\epsilon > 0$, there exists a $\delta > 0$ such that for all $x_1, x_2 \in X$, if $d_X(x_1, x_2) < \delta$, then $d_Y(f(x_1), f(x_2)) < \epsilon$. This captures the idea that the function does not produce sudden jumps or breaks.
+\end{definition}
+
+\begin{example}
+    Consider the function $f: \dR \to \dR$ defined by $f(x) = 2x$, where $\dR$ is the set of real numbers with the standard topology. We show that $f$ is continuous.
+
+Let $V = (a, b)$ be an open interval in $\dR$. The preimage of $V$ under $f$ is:
+\[
+f^{-1}(V) = \{x \in \dR \mid f(x) = 2x \in (a, b)\} = \left( \frac{a}{2}, \frac{b}{2} \right).
+\]
+Since $\left( \frac{a}{2}, \frac{b}{2} \right)$ is an open interval in $\dR$, it follows that $f^{-1}(V)$ is open in $\dR$. Therefore, $f(x) = 2x$ is continuous.
+\end{example}
+This example illustrates how continuity in topological spaces generalizes the idea of preserving open sets without the need for a specific distance function.
+
+
+
+
+\subsection{Metric Space}
+A metric space is a specific type of topological space where the structure is less abstract and more concrete. The topology of a metric space is defined explicitly by a distance function, called a metric, which assigns a real number to represent the distance between any two points in the space. This makes the notion of "closeness" more intuitive and less vague compared to general topological spaces, where the concept of distance might not exist or be explicitly defined. Metric spaces serve as a bridge between the abstract theory of topology and more familiar geometrical notions.
+    \begin{definition}
+        A metric space is a set $X$ together with a function $\rho: X \times X \longrightarrow \dR$ (called the metric of $X$) which satisfies the following properties for all $x, y, z \in X$:
+        \begin{itemize}
+            \item {Positive definite: $\rho(x, y) \geq 0$ with $\rho(x, y) = 0$ if and only if $x = y$}
+            \item {Symmetric: $\rho(x, y) = \rho(y, x)$}
+            \item{Triangle inequality: $\rho(x, y) \leq \rho(x, z)+\rho(z, y)$.}
+        \end{itemize}
+        \textit{Note that:} By definition, $\rho(x, y)$ is finite valued for all $x, y \in X$.
+    \end{definition}
+
+    \begin{example}
+    Consider the space \( C([a, b]) \). We define a metric \( d \) on this space by the supremum metric:
+$$
+d(f, g) = \sup_{x \in [a, b]} |f(x) - g(x)|,
+$$
+where \( f, g \in C([a, b]) \).
+    
+\textit{1. Positive Definite:} Since \( |f(x) - g(x)| \geq 0 \) for all \( x \in [a, b] \), we have \( d(f, g) \geq 0 \).
+
+If \( d(f, g) = 0 \), then \( \sup_{x \in [a, b]} |f(x) - g(x)| = 0 \), which implies \( |f(x) - g(x)| = 0 \) for all \( x \). Hence, \( f(x) = g(x) \) for all \( x \in [a, b] \), so \( f = g \).
+
+Conversely, if \( f = g \), then \( |f(x) - g(x)| = 0 \) for all \( x \), so \( d(f, g) = 0 \).
+
+\textit{2. Symmetry:} Since \( |f(x) - g(x)| = |g(x) - f(x)| \) for all \( x \in [a, b] \), it follows that
+$$
+d(f, g) = \sup_{x \in [a, b]} |f(x) - g(x)| = \sup_{x \in [a, b]} |g(x) - f(x)| = d(g, f).
+$$
+
+\textit{3. Triangle inequality:} For all \( x \in [a, b] \), we have:
+$$
+|f(x) - h(x)| \leq |f(x) - g(x)| + |g(x) - h(x)|.
+$$
+Taking the supremum on both sides over \( x \in [a, b] \), we get:
+$$
+\sup_{x \in [a, b]} |f(x) - h(x)| \leq \sup_{x \in [a, b]} |f(x) - g(x)| + \sup_{x \in [a, b]} |g(x) - h(x)|.
+$$
+Thus,
+$$
+d(f, h) \leq d(f, g) + d(g, h).
+$$
+
+Therefore, the function \( d(f, g) = \sup_{x \in [a, b]} |f(x) - g(x)| \) satisfies the properties of a metric, and hence \( (C([a, b]), d) \) is a metric space.
+\end{example}
+
+\subsubsection{Openness and Closeness of a Metric Space}
+Unlike the abstract definitions of open and closed sets in topological spaces, where openness is defined relative to a given topology, in metric spaces these definitions are grounded in the notion of distance, making them more intuitive and less vague. We begin with the concrete concept of open and closed balls in a metric space.
+\begin{definition}
+    Let \(a \in X\) and \(r > 0\). The \textit{open ball} (in \(X\)) with \textit{center} \(a\) and \textit{radius} \(r\) is the set
+    \[
+    B_r(a) := \{x \in X : \rho(x, a) < r\},
+    \]
+    and the \textit{closed ball} (in \(X\)) with \textit{center} \(a\) and \textit{radius} \(r\) is the set
+    \[
+    \overline{B}_r(a) := \{x \in X : \rho(x, a) \leq r\}.
+    \]
+\end{definition}
+
+\begin{comment}
+\begin{example}
+Consider \(\mathbb{R}^2\) with the Euclidean metric \(\rho((x_1, y_1), (x_2, y_2)) = \sqrt{(x_1 - x_2)^2 + (y_1 - y_2)^2}\).\\
+The set \(B_1((0, 0)) = \{(x, y) \in \mathbb{R}^2 : \sqrt{x^2 + y^2} < 1\}\) is an open ball in \(\mathbb{R}^2\). Geometrically, this represents the interior of a circle of radius 1 centered at the origin.\\
+The set \(\overline{B}_1((0, 0)) = \{(x, y) \in \mathbb{R}^2 : \sqrt{x^2 + y^2} \leq 1\}\) is a closed ball in \(\mathbb{R}^2\), which corresponds to the closed disk of radius 1 centered at the origin, including all the points on the boundary.
+\end{example}
+\end{comment}
+
+\begin{remark}
+    Consider the space \( \ell^2 \), the set of all square-summable sequences of real numbers:
+    $$
+    \ell^2 = \left\{ x = (x_n)_{n \in \dN} : \sum_{n=1}^\infty x_n^2 < \infty \right\}.
+    $$
+    The metric on \( \ell^2 \) is defined as:
+    $$
+    \rho(x, y) = \left( \sum_{n=1}^\infty (x_n - y_n)^2 \right)^{\frac{1}{2}}.
+    $$
+    For the origin \( 0 = (0, 0, \dots) \in \ell^2 \), consider the open ball:
+    $$
+    B_r(0) = \left\{ x = (x_n)_{n \in \dN} \in \ell^2 : \left( \sum_{n=1}^\infty x_n^2 \right)^{\frac{1}{2}} < r \right\}.
+    $$
+    Geometrically, this represents the set of all sequences in \( \ell^2 \) whose norm is less than \( r \). 
+
+    Similarly, the closed ball is given by:
+    $$
+    \overline{B}_r(0) = \left\{ x = (x_n)_{n \in \dN} \in \ell^2 : \left( \sum_{n=1}^\infty x_n^2 \right)^{\frac{1}{2}} \leq r \right\}.
+    $$
+    This closed ball includes all square-summable sequences with norm less than or equal to \( r \), analogous to the closed disk in finite-dimensional Euclidean space.
+\end{remark}
+
+
+In metric spaces, open and closed sets are naturally defined using open balls, providing a concrete and intuitive framework for understanding these concepts.
+\begin{definition} \hfill
+\begin{itemize}
+    \item {(i) A set \(V \subseteq X\) is said to be \textit{open} if and only if for every point \(x \in V\), there exists an \(\epsilon > 0\) such that the open ball \(B_\epsilon(x)\) is contained within \(V\). In other words, around each point in the set, we can find a "bubble" of nearby points that also lie in the set.}
+    \item {(ii) A set \(E \subseteq X\) is said to be \textit{closed} if and only if its complement \(E^c := X \setminus E\) is open. This definition aligns with the topological concept of closedness but gains more concrete meaning through the metric, as it implies the set contains all its limit points.}
+\end{itemize}
+\end{definition}
+\pagebreak
+\begin{remark}
+    Every open ball is open, and every closed ball is closed in a metric space.
+\end{remark}
+
+\begin{proof}
+    Let \(B_r(a)\) be an open ball and \(x \in B_r(a)\). Set \(\epsilon = r - \rho(x, a)\).\\
+    For any \(y \in B_\epsilon(x)\), by the Triangle Inequality and the choice of \(\epsilon\), we have:
+    \[
+    \rho(y, a) \leq \rho(y, x) + \rho(x, a) < \epsilon + \rho(x, a) = r.
+    \]
+    Thus, \(y \in B_r(a)\), which shows that \(B_\epsilon(x) \subseteq B_r(a)\). By the definition of openness, \(B_r(a)\) is open.\\
+    Similarly, the set \(\{x \in X : \rho(x, a) > r\}\) is open, which makes its complement \(\{x \in X : \rho(x, a) \leq r\}\) closed. Therefore, every closed ball is closed.
+\end{proof}
+
+\subsubsection{Boundedness}
+Boundedness is a key concept in metric spaces, where it is defined based on distances between points. A set is considered bounded if the distances between any two points in the set are uniformly constrained within a certain limit. This ensures that the set does not "spread out" infinitely.
+\begin{comment}
+    \begin{definition}
+Let $(X, d)$ be a metric space. A subset $A \subseteq X$ is said to be \textbf{bounded} if there exists a real number $M > 0$ such that for all $x, y \in A$:
+\[
+d(x, y) \leq M.
+\]
+\end{definition}
+
+\begin{example}
+Consider the real line $\dR$ with the standard Euclidean metric $d(x, y) = |x - y|$. Let $A = [0, 1]$ be a subset of $\dR$. 
+
+The set $A$ is bounded because for any two points $x, y \in [0, 1]$, the distance between them is at most $1$, i.e., $d(x, y) \leq 1$. Therefore, $A$ is bounded in $\dR$ with $M = 1$.
+\end{example}
+\end{comment}
+\begin{definition}
+Let $(X, d)$ be a metric space. A subset $A \subseteq X$ is said to be \textbf{bounded} if there exists a real number $M > 0$ such that for all $x \in A$ and for some fixed point $x_0 \in X$:
+\[
+d(x, x_0) \leq M.
+\]
+This definition emphasizes the idea that the set is contained within a ball of radius $M$ around a fixed point $x_0$ in $X$.
+\end{definition}
+
+\begin{example}
+Consider the metric space $(\mathbb{R}^2, d)$, where $d(x, y)$ is the Euclidean distance.
+Let $A$ be the closed disk of radius 1 centered at the origin:
+\[
+A = \{ (x_1, x_2) \in \mathbb{R}^2 : x_1^2 + x_2^2 \leq 1 \}.
+\]
+
+This set $A$ is bounded because the distance between any two points in $A$ is at most 2. Therefore, $A$ is bounded in $\mathbb{R}^2$ with $M = 2$.
+\end{example}
+\subsubsection{Completeness}
+Completeness refers to a property of spaces where every Cauchy sequence (or more generally, every Cauchy net) converges to a limit within the space. This concept ensures that the space is "closed" under the process of taking limits, which is important in analysis, particularly in functional analysis and topology.
+
+Recall Cauchy sequence, which is also mentioned later in this paper.
+\begin{definition}
+    A sequence $ \{x_n\} $ in a metric space $(X, d)$ is called a Cauchy sequence if, for every $ \epsilon > 0 $, there exists an integer $ N $ such that for all $ m, n \geq N $, we have
+\[ d(x_m, x_n) < \epsilon. \]
+\end{definition}
+
+\begin{example}
+    Consider the sequence of functions \( \{f_n\} \) in the space \( C([0, 1]) \), equipped with the uniform norm:
+    $$
+    \|f\| = \sup_{x \in [0, 1]} |f(x)|.
+    $$
+    Let \( f_n(x) = \frac{x}{n} \) for \( x \in [0, 1] \). We claim that \( \{f_n\} \) is a Cauchy sequence in \( C([0, 1]) \) under this norm.
+
+    For any \( \epsilon > 0 \), choose \( N > \frac{1}{\epsilon} \). Then for all \( m, n \geq N \), we have:
+    $$
+    \|f_m - f_n\| = \sup_{x \in [0, 1]} \left| \frac{x}{m} - \frac{x}{n} \right| = \sup_{x \in [0, 1]} \frac{x |n - m|}{mn}.
+    $$
+    Since \( x \in [0, 1] \), \( x \leq 1 \), so:
+    $$
+    \|f_m - f_n\| \leq \frac{|n - m|}{mn}.
+    $$
+    Using \( m, n \geq N \), we get \( mn \geq N^2 \), and thus:
+    $$
+    \|f_m - f_n\| \leq \frac{|n - m|}{N^2}.
+    $$
+    For large \( m, n \), \( |n - m| \) is bounded, and \( \frac{|n - m|}{N^2} < \epsilon \). Therefore, \( \{f_n\} \) is a Cauchy sequence in \( C([0, 1]) \).
+\end{example}
+
+
+\begin{comment} 
+\begin{example}
+Consider the sequence $ x_n = \frac{1}{n} $ in $ \dR $. We claim that this sequence is a Cauchy sequence. For any $ \epsilon > 0 $, choose $ N = \left\lceil \frac{1}{\epsilon} \right\rceil $. Then for all $ m, n \geq N $, we have
+$$ |x_m - x_n| = \left| \frac{1}{m} - \frac{1}{n} \right| = \frac{|n - m|}{mn} \leq \frac{1}{N} < \epsilon. $$
+Hence, $ \{x_n\} $ is a Cauchy sequence.
+\end{example} 
+\end{comment}
+
+In metric spaces, completeness is usually defined with respect to Cauchy sequences. However, in topological spaces, Cauchy nets are used.
+
+\begin{definition}
+Let $X$ be a topological space and let $\{ x_\alpha \}$ be a net in $X$ indexed by a directed set $A$. The net $\{ x_\alpha \}$ is called a \textit{Cauchy net} if, for every neighborhood $U$ of the diagonal $\Delta = \{ (x,x) \mid x \in X \}$ in $X \times X$, there exists an index $\alpha_0 \in A$ such that for all $\alpha, \beta \geq \alpha_0$, we have:
+$$ (x_\alpha, x_\beta) \in U. $$
+\end{definition}
+
+\begin{example}
+In the real numbers $ \dR $ with the standard topology, a net $\{x_\alpha\}$ is a Cauchy net if for every $\epsilon > 0$, there exists an index $\alpha_0$ such that for all $\alpha, \beta \geq \alpha_0$, we have:
+$$ |x_\alpha - x_\beta| < \epsilon. $$
+This is analogous to the definition of a Cauchy sequence in metric spaces.
+\end{example}
+
+With this definition, we can define completeness.
+
+\begin{definition}
+A topological space $X$ is called \textit{complete} if every Cauchy net in $X$ converges to a point in $X$. That is, for every Cauchy net $\{x_\alpha\}$ in $X$, there exists a point $x \in X$ such that $x_\alpha \to x$.
+\end{definition}
+
+\begin{example}
+In the space of real numbers $ \dR $ with the standard topology, every Cauchy net converges to a real number. Therefore, the space $ \dR $ is complete with respect to Cauchy nets.
+\end{example}
+
+\vfill
+\pagebreak
+
+\section{Linear Topological Spaces}
+A \textit{linear topological space} combines the structure of a linear space with a topology that makes its operations continuous. This integration provides a foundational framework for studying continuity, convergence, and linearity, which are crucial in functional analysis and its applications.
+\subsection{Introduction}
+\begin{definition}
+    Let $X$ be a linear space over a field $\dF$. $X$ is called a \textit{linear topological space} if there exist topologies $\rho_1$ for $X$ and $\rho_2$ for $\dF$ such that the following functions are continuous according to their corresponding topologies:\\
+    i) $X \times X \longrightarrow X$\\
+    \hspace*{0.55cm} $(x,y) \longrightarrow x+y$\\
+    ii) $\dF \times X \longrightarrow X$\\
+    \hspace*{0.55cm} $(\alpha,x) \longrightarrow \alpha x$
+\end{definition}
+One of the most common examples is Euclidean spaces as they are fundamental for many Mathematics courses and science fields.
+\begin{example}
+Euclidean space $\dR ^n$ is a linear topological space.\\
+i) Linear structure: $\dR ^n$ is a linear space.\\
+ii) Topology: As in the previous section, $\dR ^n$ is a topological space.\\
+iii) Continuity of Operation: vector addition and scalar multiplication are continuous with respect to the Euclidean topology.
+\end{example}
+
+Here is another example.
+
+\begin{example}
+Consider $C([a,b])$.\\
+i) Linear structure: It is a vector space shown above.\\
+ii) Topology: the topology of $C([a,b])$ is given by uniform convergence: ${\Vert f_n - f\Vert}_\infty \longrightarrow 0$ as $n \longrightarrow \infty$\\ 
+iii) Continuity of Operation: Both addition and scalar multiplication are continuous with respect to this topology.\\
+Let $f, g \in C([a,b]), a \in \dF$, $f_n \longrightarrow f, g_n \longrightarrow g, a_n \longrightarrow a$ by uniform convergence. Then:
+\[{\Vert f_n +g_n - (f+g)\Vert }_\infty \longrightarrow 0 \text{ as } n \longrightarrow \infty \]
+\[b {\Vert {a_n}{f_n} - af\Vert}_\infty \longrightarrow 0 \text{ as } n \longrightarrow \infty\]
+\end{example}
+
+
+In the following, we introduce Banach space and Hilbert spaces, which are among the most common fundamental examples of Linear Topological Spaces.
+\subsubsection{Banach Space}
+Before defining Banach space, we must consider a key concept, norm, which defines "length" and "magnitude" of vectors in the space.
+
+\begin{definition}
+        A norm on a vector space $V$ over a field $\dR$ (or $\mathbb{C}$) is a function $\|\cdot\| : V \to \dR$ that satisfies the following properties for all $u, v \in V$ and scalar $\alpha \in \dR$ (or $\mathbb{C}$):
+
+\begin{itemize}
+    \item Non-negativity: $\|v\| \geq 0$ with equality if and only if $v = 0$.
+    \item Scalar multiplication: $\|\alpha v\| = |\alpha| \cdot \|v\|$
+    \item Triangle inequality: $\|u + v\| \leq \|u\| + \|v\|$
+\end{itemize}
+\end{definition}
+
+\begin{example}
+    In the vector space \( C([0, 1]) \), consider the \( p \)-norm for \( 1 \leq p < \infty \):
+    $$
+    \|f\|_p = \left( \int_0^1 |f(x)|^p \, dx \right)^{1/p}.
+    $$
+
+    For instance, if \( f(x) = x^2 \) and \( p = 2 \), the \( 2 \)-norm (also called the \( L^2 \)-norm) is given by:
+    $$
+    \|f\|_2 = \left( \int_0^1 |x^2|^2 \, dx \right)^{1/2} = \left( \int_0^1 x^4 \, dx \right)^{1/2}.
+    $$
+    Computing the integral, we have:
+    $$
+    \int_0^1 x^4 \, dx = \left[ \frac{x^5}{5} \right]_0^1 = \frac{1}{5}.
+    $$
+    Thus:
+    $$
+    \|f\|_2 = \left( \frac{1}{5} \right)^{1/2} = \frac{1}{\sqrt{5}}.
+    $$
+
+    The \( p \)-norm generalizes the idea of a norm to infinite-dimensional function spaces, and it reduces to the familiar Euclidean norm in finite dimensions when applied to vectors in \( \dR^n \).
+\end{example}
+
+
+A Banach space is a complete normed vector space, a vector space equipped with a norm, and every Cauchy sequence in this space converges to a limit within the space. Banach spaces are a fundamental structure in functional analysis, generalizing Euclidean spaces to possibly infinite dimensions, where the concept of distance and completeness remains crucial. They provide a framework for studying continuous linear operators, and many problems in analysis, including differential equations and optimization.
+\begin{definition}
+A \textit{Banach space} is a vector space $B$ over the field $\mathbb{R}$ or $\mathbb{C}$, equipped with a norm $\|\cdot\|: B \to \mathbb{R}$, such that $B$ is complete with respect to this norm. This means that every Cauchy sequence in $B$ converges to a limit in $B$.
+
+Formally, a vector space $B$ with norm $\|\cdot\|$ is called a Banach space if it satisfies the following conditions:
+
+\begin{itemize}
+    \item \textbf{Normed}: There exists a norm $\|\cdot\|: B \to \dR$, satisfying for all $x, y \in B$ and $a \in \dR$ or $\mathbb{C}$:
+    \begin{itemize}
+        \item \textit{Positivity}: $\|x\| \geq 0$ and $\|x\| = 0$ if and only if $x = 0$
+        \item \textit{Homogeneity}: $\|a \cdot x\| = |a| \cdot \|x\|$
+        \item \textit{Triangle Inequality}: $\|x + y\| \leq \|x\| + \|y\|$
+    \end{itemize}
+    \item \textbf{Completeness}: Every Cauchy sequence $\{x_n\} \subset B$, such that $\|x_n - x_m\| \to 0$ as $n, m \to \infty$, converges to a limit $x \in B$, i.e., $\lim_{n \to \infty} x_n = x$.
+\end{itemize}
+\end{definition}
+
+\begin{comment}
+    
+\begin{example}
+Let $C([a, b])$ denote the space of continuous real-valued functions on the interval $[a, b]$. For $f \in C([a, b])$, the $supremum norm$ is defined as:
+
+$
+\|f\|_\infty = \sup_{x \in [a,b]} |f(x)|
+$
+
+The space $C([a, b])$, equipped with the supremum norm $\|\cdot\|_\infty$, is a Banach space. This means that any Cauchy sequence of functions in $C([a, b])$ converges uniformly to a function that is also in $C([a, b])$.
+\end{example}
+
+The following example is more advanced. It involves measurable functions and the concept of integrability, while the previous example only deals with continuous functions. 
+
+\end{comment}
+\begin{example}
+    Recall the space $L^p([a, b])$ with the $p$-norm:
+\[
+\|f\|_p = \left( \int_a^b |f(x)|^p \, dx \right)^{1/p} < \infty,
+\]
+
+where $1 \leq p < \infty$ is a real number. This is a Banach space:
+
+1. Normed vector space: $L^p([a, b])$ is a vector space with the norm $\|\cdot\|_p$ that satisfies the norm properties (non-negativity, homogeneity, triangle inequality, and the fact that $\|f\|_p = 0$ if and only if $f = 0$ almost everywhere).
+
+2. Completeness: Every Cauchy sequence $\{f_n\} \subseteq L^p([a, b])$ (i.e., $\|f_n - f_m\|_p \to 0$ as $n, m \to \infty$) converges to a limit function $f \in L^p([a, b])$ in the norm $\|\cdot\|_p$.
+
+\end{example}
+
+The Banach-Steinhaus Theorem, or Uniform Boundedness Principle, is a key result in functional analysis that ensures a family of bounded linear operators is uniformly bounded under certain conditions. It is fundamental in understanding the behavior of operators in Banach spaces.
+
+\begin{theorem} [Banach-Steinhaus - Uniform Boundedness Principle] \hfill \\
+Let $X$ be a Banach space, and let $\{T_\alpha\}_{\alpha \in A}$ be a family of bounded linear operators from $X$ to a normed vector space $Y$. If for every $x \in X$, the set $\{T_\alpha(x) : \alpha \in A\}$ is bounded in $Y$, then the operators are uniformly bounded, i.e., there exists a constant $C \geq 0$ such that 
+$$\sup_{\alpha \in A} \|T_\alpha\| \leq C.$$
+\end{theorem}
+
+\begin{proof}
+
+\textit{Proof by contrapositive:} Suppose the family $\{T_\alpha\}_{\alpha \in A}$ is not uniformly bounded. This means that for every $n \in \dN$, there exists some $\alpha_n \in A$ such that
+$$ \|T_{\alpha_n}\| > n.$$
+That is, for each $n$, there exists an $x_n \in X$ such that 
+$$ \|T_{\alpha_n}(x_n)\| > n \|x_n\|.$$
+Without loss of generality, we may assume that $\|x_n\| = 1$, for if not, we can replace $x_n$ by $\frac{x_n}{\|x_n\|}$.
+
+Thus, we have a sequence $\{x_n\}$ in $X$ with $\|x_n\| = 1$ and 
+$$ \|T_{\alpha_n}(x_n)\| > n.$$
+
+Now, consider the set $B = \{x_1, x_2, x_3, \dots\}$. Since $X$ is a Banach space, the closed unit ball is weakly compact by the Banach-Alaoglu theorem. Therefore, there exists a subsequence $\{x_{n_k}\}$ of $\{x_n\}$ that converges weakly to some $x \in X$.
+
+By assumption, for every $x \in X$, the set $\{T_\alpha(x) : \alpha \in A\}$ is bounded, so for the weak limit $x$, the sequence $\{T_{\alpha_{n_k}}(x)\}$ is bounded. However, we have
+$$ \|T_{\alpha_{n_k}}(x_{n_k})\| > n_k,$$
+which contradicts the assumption that $\{T_\alpha(x)\}$ is bounded for every $x \in X$. 
+
+Thus, the family $\{T_\alpha\}_{\alpha \in A}$ must be uniformly bounded.
+\end{proof}
+
+\subsubsection{Hilbert Space}
+Define inner product, a key geometric concept, making it a central tool in analyzing and solving problems involving infinite-dimensional spaces.
+    \begin{definition}
+        An inner product on a vector space $V$ over a field $\dR$ (or $\mathbb{C}$) is a function $\langle \cdot, \cdot \rangle : V \times V \to \dR$ (or $\mathbb{C}$) that satisfies the following properties for all $u, v, w \in V$ and scalar $\alpha \in \dR$ (or $\mathbb{C}$):
+
+\begin{itemize}
+    \item Linearity: $\langle \alpha u + v, w \rangle = \alpha \langle u, w \rangle + \langle v, w \rangle$
+    \item Symmetry: $\langle u, v \rangle = \langle v, u \rangle$ (or conjugate symmetry in $\mathbb{C}$: $\langle u, v \rangle = \overline{\langle v, u \rangle}$)
+    \item Positivity: $\langle v, v \rangle \geq 0$ with equality if and only if $v = 0$.
+\end{itemize}
+    \end{definition}
+
+\begin{example}
+Consider the vector space \( L^2([a, b]) \).
+
+To verify that \( L^2([a, b]) \) is complete, consider a Cauchy sequence \( \{ f_n \} \) in \( L^2([a, b]) \). By definition, for every \( \epsilon > 0 \), there exists \( N \in \mathbb{Z} \) such that for all \( m, n \geq N \), we have
+\[
+\|f_n - f_m\| = \sqrt{\int_a^b |f_n(x) - f_m(x)|^2 \, dx} < \epsilon.
+\]
+This implies that \( \{ f_n \} \) converges pointwise to some limit function \( f \) in \( L^2([a, b]) \).
+
+Since \( L^2([a, b]) \) is a complete metric space with respect to this norm, the limit function \( f \) also belongs to \( L^2([a, b]) \). Therefore, the sequence \( \{ f_n \} \) converges to \( f \) in the \( L^2 \)-norm, confirming the completeness of \( L^2([a, b]) \).
+\end{example}
+
+A Hilbert space is a complete inner product space that extends the idea of Euclidean space to potentially infinite dimensions. It plays a central role in functional analysis, offering a structure for exploring both geometric and algebraic properties in spaces that may be infinite-dimensional. Hilbert spaces are essential in areas such as quantum mechanics, signal processing, and Fourier analysis, as they enable the generalization of concepts like orthogonality, projections, and distance.
+    
+    \begin{definition}
+    A \textit{Hilbert space} is a vector space $H$ over the field $\mathbb{R}$ or $\mathbb{C}$, equipped with an inner product $\langle \cdot, \cdot \rangle : H \times H \to \mathbb{R}$ (or $\mathbb{C}$) that satisfies the following properties for all $x, y, z \in H$ and scalar $a$:
+
+\begin{itemize}
+    \item \textbf{Conjugate symmetry}: $\langle x, y \rangle = \overline{\langle y, x \rangle}$, where $\overline{\cdot}$ denotes the complex conjugate.
+    \item \textbf{Linearity in the first argument}: $\langle ax + y, z \rangle = a\langle x, z \rangle + \langle y, z \rangle$.
+    \item \textbf{Positivity}: $\langle x, x \rangle \geq 0$ with equality if and only if $x = 0$.
+\end{itemize}
+Furthermore, $H$ is said to be \textit{complete} if every Cauchy sequence in $H$ converges to a limit within $H$. This means that $H$ contains all limits of sequences that approach a limit in terms of the inner product norm.
+    \end{definition}
+\begin{comment}
+    \begin{example}
+Consider the vector space \( \dR^n \) with the standard inner product defined by
+\[
+\langle \mathbf{u}, \mathbf{v} \rangle = \sum_{i=1}^n u_i v_i,
+\]
+where \( \mathbf{u} = (u_1, u_2, \ldots, u_n) \) and \( \mathbf{v} = (v_1, v_2, \ldots, v_n) \) are vectors in \( \dR^n \).
+
+The norm induced by this inner product is given by
+\[
+\|\mathbf{v}\| = \sqrt{\langle \mathbf{v}, \mathbf{v} \rangle} = \sqrt{\sum_{i=1}^n v_i^2}.
+\]
+For example, if \( \mathbf{v} = (1, 2, \ldots, n) \), then the inner product \( \langle \mathbf{v}, \mathbf{v} \rangle \) is
+\[
+\langle \mathbf{v}, \mathbf{v} \rangle = 1^2 + 2^2 + \cdots + n^2 = \sum_{i=1}^n i^2,
+\]
+and the norm is
+\[
+\|\mathbf{v}\| = \sqrt{\sum_{i=1}^n i^2}.
+\]
+
+To show that \( \dR^n \) is complete, consider a Cauchy sequence \( \{ \mathbf{v}_m \} = \{ (v_{m1}, v_{m2}, \ldots, v_{mn}) \} \) in \( \dR^n \). This means that for every \( \epsilon > 0 \), there exists \( N \in \mathbb{Z} \) such that for all \( m, k \geq N \), we have
+\[
+\|\mathbf{v}_m - \mathbf{v}_k\| = \sqrt{\sum_{i=1}^n (v_{mi} - v_{ki})^2} < \epsilon.
+\]
+This implies that each component sequence \( \{v_{mi}\} \) in \( \dR \) is a Cauchy sequence for \( i = 1, 2, \ldots, n \).
+
+Since \( \dR \) is complete, each sequence \( \{v_{mi}\} \) converges to a limit \( v_i \) in \( \dR \). Therefore, the vector sequence \( \{ \mathbf{v}_m \} \) converges to the vector \( \mathbf{v} = (v_1, v_2, \ldots, v_n) \in \dR^n \).
+
+Thus, every Cauchy sequence in \( \dR^n \) converges to a limit in \( \dR^n \), proving that \( \dR^n \) is complete.
+
+We have shown that in \( \dR^n \), the inner product induces a norm, and the space is complete. Therefore, \( \dR^n \) is a Hilbert space.
+\end{example}
+ 
+\end{comment}
+
+\begin{example}
+An example of a Hilbert space is \( H^2(\mathbb{D}) \), the Hardy space of holomorphic functions on the open unit disk \( \mathbb{D} \subset \mathbb{C} \). This space consists of all holomorphic functions \( f \) on \( \mathbb{D} \) such that:
+\[
+\|f\|^2 = \sup_{0 \leq r < 1} \frac{1}{2\pi} \int_0^{2\pi} |f(re^{i\theta})|^2 \, d\theta < \infty.
+\]
+The inner product on \( H^2(\mathbb{D}) \) is given by:
+\[
+\langle f, g \rangle = \frac{1}{2\pi} \int_0^{2\pi} f(e^{i\theta}) \overline{g(e^{i\theta})} \, d\theta,
+\]
+where \( f, g \in H^2(\mathbb{D}) \) and \( \overline{g} \) denotes the complex conjugate of \( g \).
+
+This space is complete with respect to the norm induced by the inner product, meaning every Cauchy sequence of functions in \( H^2(\mathbb{D}) \) converges to an element in \( H^2(\mathbb{D}) \). Furthermore, \( H^2(\mathbb{D}) \) has an orthonormal basis \( \{z^n\}_{n=0}^\infty \), where \( z^n \) represents the monomials of degree \( n \). Thus, \( H^2(\mathbb{D}) \) is a Hilbert space.
+\end{example}
+
+\subsubsection{Orthonormal Basis}
+In a Hilbert space, a basis is typically chosen to leverage the additional structure provided by the inner product. This is why the term "orthonormal basis" is used, emphasizing the orthogonality and normalization properties that are crucial, especially in the study of infinite-dimensional spaces.
+
+\begin{definition}
+An \textit{orthonormal basis} of a Hilbert space $H$ is a set of vectors $\{e_i\}$ that:
+\begin{enumerate}
+    \item $\langle e_i, e_j \rangle = 0$ for $i \neq j$ (orthogonality),
+    \item $\langle e_i, e_i \rangle = 1$ (normalization),
+    \item Any vector $v \in H$ can be written as $v = \sum_i \langle v, e_i \rangle e_i$ (spanning property).
+\end{enumerate}
+\end{definition}
+
+\noindent \textbf{Dimensionality:}
+\begin{itemize}
+    \item In finite-dimensional Hilbert spaces, the number of orthonormal basis vectors equals the dimension of the space.
+    \item In infinite-dimensional Hilbert spaces, the basis can be countably or uncountably infinite, depending on the structure of the space.
+\end{itemize}
+
+\begin{example}
+Consider the Hilbert space $\dR^3$ with the standard inner product:
+\[
+\langle \mathbf{u}, \mathbf{v} \rangle = u_1 v_1 + u_2 v_2 + u_3 v_3,
+\]
+where $\mathbf{u} = (u_1, u_2, u_3)$ and $\mathbf{v} = (v_1, v_2, v_3)$ are vectors in $\dR^3$ and the set $\{\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3\}$ is its orthonormal basis.
+
+\begin{enumerate}
+    \item \textbf{Orthogonality:} $\langle \mathbf{e}_i, \mathbf{e}_j \rangle = 0$ for $i \neq j$, as the standard basis vectors are orthogonal.
+
+    \item \textbf{Normalization:} $\langle \mathbf{e}_i, \mathbf{e}_i \rangle = 1$ for all $i$, as each standard basis vector has a unit length.
+
+    \item \textbf{Spanning Property:} Any vector $\mathbf{v} \in \dR^3$ can be written as
+    \[
+    \mathbf{v} = v_1 \mathbf{e}_1 + v_2 \mathbf{e}_2 + v_3 \mathbf{e}_3,
+    \]
+    where $v_i = \langle \mathbf{v}, \mathbf{e}_i \rangle$ for $i = 1, 2, 3$.
+\end{enumerate}
+
+This example demonstrates how the standard basis in finite-dimensional spaces naturally forms an orthonormal basis.
+\end{example}
+
+
+\begin{example}
+In the Hilbert space $L^2([0, 1])$, the set 
+\[
+\left\{\sqrt{2} \sin(n \pi x), \sqrt{2} \cos(n \pi x)\right\}_{n=1}^\infty
+\]
+forms an orthonormal basis.
+\begin{enumerate}
+    \item \textbf{Orthogonality:} $\langle \sqrt{2} \sin(m \pi x), \sqrt{2} \cos(n \pi x) \rangle = 0$ for all $m, n$, since sine and cosine functions with different frequencies are orthogonal in $L^2([0, 1])$.
+
+    \item \textbf{Normalization:} $\langle \sqrt{2} \sin(n \pi x), \sqrt{2} \sin(n \pi x) \rangle = 1$ and similarly for cosine terms, as their squared integrals over $[0, 1]$ equal $1$ after normalization.
+
+    \item \textbf{Spanning property:} Any function $f \in L^2([0, 1])$ can be written as
+    \[
+    f(x) = \sum_{n=1}^\infty \left( a_n \sqrt{2} \sin(n \pi x) + b_n \sqrt{2} \cos(n \pi x) \right),
+    \]
+    where $a_n$ and $b_n$ are computed as the inner products of $f$ with the basis functions:
+    \[
+    a_n = \langle f, \sqrt{2} \sin(n \pi x) \rangle, \quad b_n = \langle f, \sqrt{2} \cos(n \pi x) \rangle.
+    \]
+\end{enumerate}
+This set forms a fundamental example of an orthonormal basis in an infinite-dimensional Hilbert space.
+\end{example}
+
+
+\pagebreak
+\subsection{Functionals and Dual Spaces}
+This section introduces the concept of a linear functional, which is a specific type of linear transformation. A linear functional is a linear map from a vector space $V$ to its underlying field $F$ (usually $\dR$ or $\mathbb{C}$). It satisfies the properties of linearity, making it a linear transformation, but with the key distinction that its codomain is the field $F$. Thus, all linear functionals are linear transformations, though not all linear transformations are linear functionals.
+\subsubsection{Functionals}
+\begin{definition}
+    A functional is a mapping from a space of functions into the real numbers $\dR$ (or another space). In other words, it takes a function as input and outputs a scalar.
+\end{definition}
+\begin{example}
+    $J[f] = \int_a^b (f(x))^2 \, dx$\\
+    It assigns real number into the function by interation. Hence, it's a functional.
+\end{example}
+Now, let's add linearity into it.
+\begin{definition}
+    Let $V$ be a vector space over a field $F$. A function $f: V \to F$ is called a \textit{linear functional} if it satisfies the following two properties for all $u, v \in V$ and $a \in F$:
+
+\begin{itemize}
+    \item \textbf{Additivity}: $f(u + v) = f(u) + f(v)$
+    \item \textbf{Homogeneity}: $f(a \cdot v) = a \cdot f(v)$
+\end{itemize}
+\end{definition}
+
+While a linear functional satisfies both additivity and homogeneity, a sublinear functional only requires positive homogeneity and subadditivity. This makes sublinear functionals useful in optimization and convex analysis, where strict linearity is not always necessary.
+
+\begin{definition}
+    A function $p: V \to \dR$ defined on a vector space $V$ is called a \textit{sublinear functional} if it satisfies the following two properties for all $u, v \in V$ and $a \geq 0$:
+
+\begin{itemize}
+    \item \textbf{Positive Homogeneity}: $p(a \cdot u) = a \cdot p(u)$ for all $a \geq 0$
+    \item \textbf{Subadditivity}: $p(u + v) \leq p(u) + p(v)$
+\end{itemize}
+\end{definition}
+\begin{comment}
+    \begin{example}
+    Consider the vector space $V = \mathbb{R}^n$ and define the function $p: \mathbb{R}^n \to \mathbb{R}$ by:
+
+\[
+p(x) = \|x\|_2 = \sqrt{x_1^2 + x_2^2 + \cdots + x_n^2}
+\]
+
+This function $p(x)$, which represents the Euclidean norm of the vector $x$, is a sublinear functional because it satisfies the following properties:
+
+\begin{itemize}
+    \item \textbf{Positive Homogeneity}: For any $a \geq 0$ and any vector $x \in \mathbb{R}^n$, we have:
+    \[
+    p(a \cdot x) = \|a \cdot x\|_2 = a \cdot \|x\|_2
+    \]
+    
+    \item \textbf{Subadditivity}: For any vectors $x, y \in \mathbb{R}^n$, we have:
+    \[
+    p(x + y) = \|x + y\|_2 \leq \|x\|_2 + \|y\|_2
+    \]
+    by the triangle inequality.
+\end{itemize}
+    \end{example}
+\end{comment}
+
+\begin{example}
+    Consider the vector space \( V = C([0, 1]) \), and define the function \( p: C([0, 1]) \to \mathbb{R} \) by:
+    $$
+    p(f) = \int_0^1 |f(x)| \, dx.
+    $$
+
+    This function \( p(f) \), which represents the \( L^1 \)-norm of the function \( f \), is a sublinear functional because it satisfies the following properties:
+    
+    \begin{itemize}
+        \item \textbf{Positive Homogeneity}: For any scalar \( a \geq 0 \) and any function \( f \in C([0, 1]) \), we have:
+        $$
+        p(a \cdot f) = \int_0^1 |a \cdot f(x)| \, dx = a \cdot \int_0^1 |f(x)| \, dx = a \cdot p(f).
+        $$
+
+        \item \textbf{Subadditivity}: For any \( f, g \in C([0, 1]) \), we have:
+        $$
+        p(f + g) = \int_0^1 |f(x) + g(x)| \, dx \leq \int_0^1 |f(x)| \, dx + \int_0^1 |g(x)| \, dx = p(f) + p(g),
+        $$
+        where the inequality follows from the triangle inequality for absolute values.
+    \end{itemize}
+
+    Thus, \( p(f) \) satisfies the properties of a sublinear functional in the infinite-dimensional space \( C([0, 1]) \).
+\end{example}
+
+
+\subsubsection{Dual Spaces}
+The dual space of a linear topological space is a fundamental concept in functional analysis, representing the collection of all continuous linear functionals on that space. Essentially, it consists of all the ways you can evaluate or measure elements of the space using linear functions that respect the space's topology. This dual space provides insight into the structure and behavior of the original space, playing a crucial role in various areas such as optimization and theoretical analysis.
+\begin{definition}
+    The dual space of a linear topological space $X$, denoted as $X^*$, is the set of all continuous linear functionals from $X$ to $\dR$. Formally,
+\[
+X^* = \{ f \mid f : X \to \dR \text{ is linear and continuous} \}.
+\]
+\end{definition}
+\pagebreak
+
+\begin{example}
+Consider the space $\dR^n$, where $n$ is a positive integer.
+
+\textbf{- Space}: $\dR^n$ is a finite-dimensional vector space of all $n$-tuples of real numbers.
+
+\textbf{- Dual Space}: The dual space of $\dR^n$, denoted $(\dR^n)^*$, consists of all continuous linear functionals from $\dR^n$ to $\dR$. Since every linear functional on a finite-dimensional space is continuous, the dual space $(\dR^n)^*$ is also finite-dimensional and is isomorphic to $\dR^n$ itself. Specifically, each functional can be represented as a dot product with a fixed vector in $\dR^n$:
+\[
+f(\mathbf{x}) = \mathbf{v} \cdot \mathbf{x}, \quad \mathbf{v} \in \dR^n.
+\]
+Therefore, the dual space is also of dimension $n$.
+\end{example}
+
+\begin{example}
+Consider the space $C([0,1])$.
+
+\textbf{- Space}: $C([0,1])$ is an infinite-dimensional vector space because the number of linearly independent continuous functions on $[0,1]$ is infinite.
+
+\textbf{- Dual Space}: The dual space of $C([0,1])$, denoted $C([0,1])^*$, consists of all continuous linear functionals from $C([0,1])$ to $\dR$. One famous example of a functional in $C([0,1])^*$ is given by the Riemann integral:
+\[
+f(g) = \int_0^1 g(x) \, dx, \quad g \in C([0,1]).
+\]
+This functional takes a continuous function $g(x)$ on $[0,1]$ and maps it to a real number via integration. The dual space of $C([0,1])$ is infinite-dimensional because there are infinitely many ways to define linear functionals on infinite-dimensional spaces. In fact, this dual space is larger and more complex than the original space.
+\end{example}
+
+In functional analysis, the double dual space extends the idea of the dual space, offering deeper insights into a vector space's structure. It consists of continuous linear functionals on the dual space, helping to assess the space's completeness. A key question is whether the original space can be recovered from the double dual, leading to reflexivity. In many infinite-dimensional cases, the double dual is larger, revealing more complexity.
+
+\begin{definition}
+Let $X$ be a vector space over a field $\dR$ (or $\dC$), and let $X^*$ denote its dual space, which is the space of all continuous linear functionals on $X$. The \textbf{double dual space}, denoted $X^{**}$, is defined as the dual space of $X^*$:
+\[
+X^{**} = (X^*)^*.
+\]
+There is a natural map, $\Phi: X \to X^{**}$, called the evaluation map, defined by
+\[
+\Phi(x)(f) = f(x), \quad \forall f \in X^*.
+\]
+This map is injective, and if it is surjective, the space $X$ is said to be \textbf{reflexive}.
+\end{definition}
+
+\begin{example}
+    Consider the finite-dimensional vector space $X = \dR^n$. The dual space $(\dR^n)^*$ is isomorphic to $\dR^n$, and since the double dual space $((\dR^n)^*)^*$ is also isomorphic to $\dR^n$, we conclude that $\dR^n$ is reflexive. 
+
+In contrast, for the infinite-dimensional space $X = \ell^1$, the dual space $(\ell^1)^*$ is isomorphic to $\ell^\infty$, and the double dual $(\ell^1)^{**} = (\ell^\infty)^*$ is strictly larger than $\ell^1$, meaning $\ell^1$ is not reflexive.
+\end{example}
+
+\subsubsection{Weak Topology}
+In functional analysis, the \textit{weak topology} on a vector space $X$ is a topology that is coarser than the norm topology, focusing on how vectors behave with respect to \textit{linear functionals} rather than distances or norms. The key idea behind the weak topology is that it is the \textit{coarsest topology} in which all \textit{continuous linear functionals} on $X$ remain continuous.
+
+\begin{definition}
+    Let $X$ be a topological vector space, and let $X^*$ be its \textit{dual space}, which consists of all continuous linear functionals on $X$. The weak topology on $X$ is the coarsest topology such that every functional $f \in X^*$ is continuous.
+
+That is, a net $\{x_\alpha\}$ in $X$ converges to $x \in X$ in the weak topology if and only if:
+
+\[
+f(x_\alpha) \to f(x) \quad \text{for all } f \in X^*.
+\]
+
+This means that instead of convergence in terms of norms or distances, we only require that the functionals applied to the elements converge.
+\end{definition}
+
+
+The distinguishing feature of the weak topology is that it makes all \textit{continuous linear functionals} from the dual space $X^*$ continuous by definition. This relaxes the concept of convergence in the sense that instead of using norms, we use the behavior of these functionals to define open sets and convergence.
+
+\begin{example}
+Consider the Banach space \( l^p \) for \( 1 < p < \infty \), and let \( X = l^p \) with its dual space \( X^* = l^q \), where \( \frac{1}{p} + \frac{1}{q} = 1 \).
+
+\textbf{Weak Topology:} In the weak topology on \( X = l^p \), a sequence \( \{x_n\} \subset l^p \) converges weakly to \( x \in l^p \) if and only if:
+\[
+f(x_n) \to f(x) \quad \text{for all } f \in X^* = l^q.
+\]
+
+Thus, instead of requiring convergence in the \( l^p \)-norm (i.e., \( \|x_n - x\|_p \to 0 \)), we only require that for every \( y \in l^q \),
+\[
+\sum_{k=1}^\infty x_n[k] y[k] \to \sum_{k=1}^\infty x[k] y[k].
+\]
+
+\textbf{Distinction from Norm Topology:} For example, the sequence \( x_n = \{e_k\} \) in \( l^p \), where \( e_k \) is the sequence with a 1 in the \( k \)-th position and 0 elsewhere, does not converge in the norm topology of \( l^p \). However, \( x_n \) converges weakly to 0 in \( l^p \), because for any \( y \in l^q \),
+\[
+\langle x_n, y \rangle = y[n] \to 0 \quad \text{as } n \to \infty.
+\]
+
+\end{example}
+
+This example illustrates the weak topology: it relaxes the notion of convergence to focus only on the behavior of sequences (or nets) under the action of continuous linear functionals, rather than their behavior in terms of norm distances.
+\pagebreak
+
+\begin{remark} \hfill
+\begin{itemize}
+    \item \textbf{Coarse Topology}: A topology is said to be \textit{coarser} than another if it has \textit{fewer open sets}. A topology $T_1$ on a set $X$ is coarser than another topology $T_2$ on the same set if $T_1 \subseteq T_2$. 
+    
+    This means that the coarser topology distinguishes fewer points and is less refined than a finer topology.
+
+    \item \textbf{Coarsest Topology}: The \textit{coarsest topology} on a set $X$ is the topology with the fewest open sets that still satisfies the topology axioms. The coarsest topology is also known as the \textit{trivial topology} and is defined as $T_{\text{coarsest}} = \{\emptyset, X\}$. 
+    
+    This topology distinguishes no points except the empty set and the whole set itself.
+\end{itemize}
+
+\end{remark}
+
+\subsection{Reflexivity and Weak* Topology}
+Reflexivity is an important concept in the study of linear topological spaces, particularly Banach spaces. It relates to how a space can be naturally identified with its double dual, revealing deep connections between a space and its dual. Reflexivity is a critical property in understanding the behavior of functionals and operators on the space, and plays a key role in many areas of functional analysis.
+
+\begin{definition}
+A Banach space $X$ is called \textit{reflexive} if the natural map $J: X \to X^{**}$, defined by $J(x)(f) = f(x)$ for every $x \in X$ and $f \in X^*$, is surjective. In other words, every element of the double dual space $X^{**}$ corresponds to an element of the original space $X$.
+
+Mathematically, $X$ is reflexive if:
+\[
+J(X) = X^{**}
+\]
+where $J$ is the canonical embedding of $X$ into $X^{**}$.
+\end{definition}
+
+\begin{example}
+An example of a reflexive Banach space is the $L^p$ space for $1 < p < \infty$. For such $p$, the space $L^p([a,b])$ of $p$-integrable functions on the interval $[a,b]$ is reflexive.
+\end{example}
+
+In reflexive Banach spaces, the weak\(^*\) topology ensures compactness in the dual space, aiding in the study of functional convergence. Reflexivity also guarantees that weak and weak\(^*\) convergence behave consistently.
+
+\begin{definition}
+Let $X$ be a normed vector space, and let $X^*$ denote its dual space. The \textit{weak*} \textit{topology} on $X^*$ is the coarsest (weakest) topology such that for every $x \in X$, the evaluation map
+\[
+f \mapsto f(x), \quad \text{for all } f \in X^*,
+\]
+is continuous. In other words, the weak* topology is the topology of pointwise convergence on $X^*$, meaning a net $\{ f_\alpha \} \subset X^*$ converges to $f \in X^*$ in the weak$^*$ topology if and only if
+\[
+f_\alpha(x) \to f(x) \quad \text{for all } x \in X.
+\]
+\end{definition}
+
+\begin{comment}
+\begin{example}
+Consider the space $X = \dR^n$ with its usual norm. The dual space $X^*$ is also isomorphic to $\dR^n$. 
+
+The weak* topology on $X^*$ in this case is the same as the standard Euclidean topology. Specifically, for any sequence $\{ f_k \} \subset \dR^n$, the sequence converges to some $f \in \dR^n$ in the weak* topology if and only if $f_k(x) \to f(x)$ for every $x \in \dR^n$, which in this case corresponds to ordinary component-wise convergence.
+\end{example}
+\end{comment}
+
+\begin{example}
+    Consider the space \( X = \ell^1 \). The dual space \( X^* = \ell^\infty \), the set of all bounded sequences, consists of all continuous linear functionals on \( \ell^1 \). 
+
+    The weak* topology on \( X^* \) is defined as the weakest topology in which the functionals \( \varphi_x(f) = \sum_{n=1}^\infty x_n f_n \), for \( x \in \ell^1 \), remain continuous. Specifically, for a sequence \( \{f_k\} \subset \ell^\infty \), the sequence converges to some \( f \in \ell^\infty \) in the weak* topology if and only if:
+    $$
+    \lim_{k \to \infty} \sum_{n=1}^\infty x_n f_k(n) = \sum_{n=1}^\infty x_n f(n) \quad \text{for all } x \in \ell^1.
+    $$
+
+    In this case, weak* convergence can be viewed as pointwise convergence of the sequence \( \{f_k\} \), evaluated against all elements of \( \ell^1 \). Unlike the standard norm topology on \( \ell^\infty \), the weak* topology is coarser and better suited for certain applications in functional analysis.
+\end{example}
+
+Compactness plays a crucial role in understanding the behavior of sequences and operators on infinite-dimensional spaces. However, while norm-compact sets are rare in infinite-dimensional spaces, compactness can still be achieved in weaker topologies. The \textit{Banach-Alaoglu Theorem} is a fundamental result that guarantees the compactness of the closed unit ball in the dual space of a normed space when equipped with the weak* topology. Before studying further, let's quickly observe the following result.
+
+\begin{theorem}[Tychonoff's Theorem] \hfill \\
+ The product of any collection of compact topological spaces is compact in the product topology.
+\end{theorem}
+\begin{proof}
+Let \( \{X_\alpha\}_{\alpha \in A} \) be a collection of compact topological spaces, and consider the product space \( X = \prod_{\alpha \in A} X_\alpha \) equipped with the product topology. To prove compactness, we use the Alexander subbase theorem, which states that a space is compact if every open cover formed by a subbase has a finite subcover.
+
+Sets of the form give the sub-base for the product topology:
+\[
+\pi_\alpha^{-1}(U_\alpha),
+\]
+where \( \pi_\alpha: X \to X_\alpha \) is the projection map, and \( U_\alpha \subseteq X_\alpha \) is open.
+
+Let \( \mathcal{U} \) be an open cover of \( X \) by subbasic sets. By the compactness of each \( X_\alpha \), the projection of \( X \) onto any finite subproduct \( \prod_{\beta \in F} X_\beta \) (for some finite \( F \subseteq A \)) is compact. This ensures that for any finite \( F \), there is a finite subcover of the corresponding finite subproduct.
+
+Finally, using the finite intersection property for compact spaces and the construction of the product topology, we can extend this to the entire product \( X \), ensuring that \( \mathcal{U} \) has a finite subcover. Hence, \( X \) is compact.
+\end{proof}
+
+
+\begin{theorem} [Banach-Alaoglu Theorem] \hfill \\
+Let $X$ be a normed vector space. The closed unit ball in the dual space $X^*$, denoted as
+\[
+B^* = \{ f \in X^* : \| f \| \leq 1 \},
+\]
+is compact in the weak* topology.
+\end{theorem}
+\pagebreak
+\begin{proof}
+Using the Tychonoff's Theorem.
+
+Consider the dual space $X^*$ as a subspace of the product space $\dR^X$, the set of all functions from $X$ to $\dR$.
+
+Equip $\dR^X$ with the product topology, where each coordinate space $\dR$ has the standard topology. By Tychonoff's Theorem, $\dR^X$ is compact.
+
+The weak* topology on $X^*$ is the topology of pointwise convergence, which is the subspace topology inherited from $\dR^X$.
+
+Therefore, $B^*$, the unit ball in $X^*$, is a closed subset of the compact space $\dR^X$ in the weak* topology.
+
+A closed subset of a compact space is compact. Hence, $B^*$ is compact in the weak* topology.
+\end{proof}
+
+This theorem is essential for understanding reflexivity, optimization, and various other aspects of functional analysis, where weak* compactness ensures the existence of limits for certain bounded sequences of functionals.
+
+
+\subsection{Local Convexity and Seminorm}
+\subsubsection{Local Convexity}
+Local convexity is essential in functional analysis, underpinning key theorems like the Hahn-Banach theorem. It provides a well-structured framework for rigorous analysis, ensuring manageable and intuitive properties of the space.
+\begin{definition} [Convex Set] \hfill \\
+     A set $C$ in a vector space is called \textit{convex} if, for any two points $x, y \in C$ and any $ t \in [0, 1] $, the point $ tx + (1-t)y $ also belongs to $ C $. In other words, $ C $ is convex if, for any $ x, y \in C $, $ tx + (1-t)y \in C \quad \forall t \in [0, 1]. $
+\end{definition}
+\begin{comment}
+\begin{example}
+Consider the set $C$ defined as the unit disk in $\dR^2$:
+\[
+C = \{ (x, y) \in \dR^2 \mid x^2 + y^2 \leq 1 \}.
+\]
+Take any two points $(x_1, y_1)$ and $(x_2, y_2)$ in $C$. Verify that for any $t \in [0, 1]$:
+\[ (x_t, y_t) = t(x_1, y_1) + (1-t)(x_2, y_2)  \in C \]
+We know that: 
+\[
+x_t = tx_1 + (1-t)x_2, \quad y_t = ty_1 + (1-t)y_2.
+\]
+Thus:
+\[
+x_t^2 + y_t^2 = (tx_1 + (1-t)x_2)^2 + (ty_1 + (1-t)y_2)^2.
+\]
+
+Since $(x_1, y_1) \text{ and } (x_2, y_2) \in C$, then $x_1^2 + y_1^2 \leq 1$ and $x_2^2 + y_2^2 \leq 1$. By the properties of convex combinations, we have:
+\[
+x_t^2 + y_t^2 \leq t(x_1^2 + y_1^2) + (1-t)(x_2^2 + y_2^2) \leq t \cdot 1 + (1-t) \cdot 1 = 1.
+\]
+Therefore, $(x_t, y_t) \in C$, hence, $C$ is convex.
+\end{example}    
+\end{comment}
+
+
+\begin{example}
+Consider a Hilbert space $H$ and the unit ball in this space, denoted by $B$:
+\[
+B = \{ x \in H \mid \|x\| \leq 1 \}
+\]
+Given $x, y \in B$ and $t \in [0,1]$, consider:
+\[
+z = tx + (1-t)y
+\]
+
+Using the triangle inequality and the property of scalar multiplication in normed spaces, we have:
+\[
+\|tx + (1-t)y\| \leq \|tx\| + \|(1-t)y\| = t\|x\| + (1-t)\|y\|
+\]
+Since $\|x\| \leq 1$ and $\|y\| \leq 1$:
+\[
+t\|x\| + (1-t)\|y\| \leq t \cdot 1 + (1-t) \cdot 1 = 1
+\]
+
+Thus, $\|z\| \leq 1$, so $z$ lies within the unit ball $B$, proving that $B$ is convex.
+\end{example}
+
+\begin{definition} [Local Convexity] \hfill \\
+    Local convexity refers to the property where every point in the space has a neighborhood basis consisting of convex sets. In other words, any point in the space has neighborhoods that are convex.
+\end{definition}
+\begin{comment}
+\begin{example} Consider the space $\dR^2$ equipped with the standard topology (where open sets are open disks around points). In this space, the convex set $C$ defined as the unit disk:
+\[
+C = \{ (x, y) \in \dR^2 \mid x^2 + y^2 \leq 1 \}
+\]
+serves as a neighborhood around the origin $(0, 0)$.\\
+For any point $(x_0, y_0) \in \dR^2$, consider an open disk centered at $(x_0, y_0)$ with radius $r > 0$:
+\[
+B_r(x_0, y_0) = \{ (x, y) \in \dR^2 \mid (x - x_0)^2 + (y - y_0)^2 < r^2 \}.
+\]
+$B_r(x_0, y_0)$ is convex because, for any two points $(x_1, y_1), (x_2, y_2) \in B_r(x_0, y_0)$ and any $t \in [0, 1]$, the point 
+\[
+(tx_1 + (1-t)x_2, ty_1 + (1-t)y_2) \in B_r(x_0, y_0)
+\]
+This follows from the convexity of the Euclidean norm.\\
+Since every point in $\dR^2$ can be surrounded by such convex neighborhoods, $\dR^2$ is locally convex.
+\end{example}    
+\end{comment}
+
+
+\begin{example}
+Consider the sequence space \( c_0 \), the space of all sequences \( \{a_n\}_{n=1}^\infty \) of real or complex numbers that converge to 0, equipped with the supremum norm:
+\[
+\|a\|_\infty = \sup_{n \geq 1} |a_n|.
+\]
+
+Let \( f, g \in c_0 \), and define a new sequence \( h \) as:
+\[
+h_n = t f_n + (1-t) g_n \quad \text{for all } n \in \mathbb{N},
+\]
+where \( t \in [0, 1] \). Since \( f_n \to 0 \) and \( g_n \to 0 \) as \( n \to \infty \), their linear combination \( h_n \) also converges to 0. Thus, \( h \in c_0 \), and \( c_0 \) is closed under convex combinations.
+
+Now, consider the open ball \( B(f, \epsilon) \) around \( f \in c_0 \) with radius \( \epsilon > 0 \).
+
+For \( g_1, g_2 \in B(f, \epsilon) \), their convex combination \( h = t g_1 + (1-t) g_2 \) satisfies:
+\[
+\|f - h\|_\infty = \|f - (t g_1 + (1-t) g_2)\|_\infty \leq t \|f - g_1\|_\infty + (1-t) \|f - g_2\|_\infty.
+\]
+Since \( \|f - g_1\|_\infty < \epsilon \) and \( \|f - g_2\|_\infty < \epsilon \), we have:
+\[
+\|f - h\|_\infty < t \epsilon + (1-t) \epsilon = \epsilon.
+\]
+Therefore, \( h \in B(f, \epsilon) \), proving that the open ball \( B(f, \epsilon) \) in \( c_0 \) is convex.
+
+\end{example}
+
+This example demonstrates local convexity in the infinite-dimensional space \( c_0 \), showing how its geometry and the supremum norm interplay to enable analysis in functional spaces.
+
+The following theorem allows the extension of linear functionals from a subspace to the entire space without losing properties such as boundedness. 
+
+\begin{theorem} [Hahn-Banach Theorem]
+Let $X$ be a real linear space, $p: X \rightarrow \dR$ be a sublinear functional, and $Y$ be a linear subspace of $X$. If $f: Y \rightarrow \dR$ is a linear functional such that $f(y) \leq p(y)$ for all $y \in Y$, then there exists an extension $F: X \rightarrow \dR$ of $f$ (i.e., $F|_Y = f$) such that $F(x) \leq p(x)$ for all $x \in X$.
+\end{theorem}
+
+\begin{proof}
+Let $F$ be on the space $Y' = \text{span}(Y \cup \{x_0\})$ by:
+\[
+F(y + \lambda x_0) = f(y) + \lambda \alpha,
+\]
+where $\lambda$ is a scalar, and $\alpha$ is a value we need to choose.\\
+We have:
+\[
+f(y) + \lambda \alpha \leq p(y + \lambda x_0) \quad \text{for all } y \in Y \text{ and } \lambda \in \dR.
+\]
+If $\lambda > 0$: $\alpha \leq \frac{p(y + \lambda x_0) - f(y)}{\lambda}$.\\
+If $\lambda < 0$: $\alpha \geq \frac{p(y + \lambda x_0) - f(y)}{\lambda}$.\\
+To satisfy both, $\alpha$ must lie between the infimum of $\frac{p(y + \lambda x_0) - f(y)}{\lambda}$ for $\lambda > 0$ and the supremum of the same expression for $\lambda < 0$.
+
+Such an $\alpha$ always exists because $p$ is sublinear, which means the function $\frac{p(y + \lambda x_0) - f(y)}{\lambda}$ is continuous and bounded.
+
+Once $F$ is defined on $Y'$, Zorn's Lemma ensures that we can keep extending $F$ to cover all of $X$.
+\end{proof}
+
+
+\subsubsection{Seminorm}
+A locally convex space has a topology that is richer and more flexible than that of a general topological vector space, making it easier to perform analysis. The topology of such a space can be generated by a family of seminorms, which generalize norms by relaxing some of their properties. Seminorms are especially useful when norms are too strong or restrictive, allowing us to describe the "local" structure around a point in both a linear and topological sense.
+
+\begin{definition}
+    A \textbf{seminorm} on a vector space $V$ over the field $\dR$ is a function $p: V \to \dR$ that satisfies the following properties for all $x, y \in V$ and $\alpha \in \dR$:
+
+\begin{itemize}
+    \item \textbf{Non-negativity}: 
+    $$ p(x) \geq 0, \ \forall x \in V. $$
+    
+    \item \textbf{Absolute scalability (homogeneity)}: 
+    $$ p(\alpha x) = |\alpha| p(x), \ \forall \alpha \in \dR, \ x \in V. $$
+    
+    \item \textbf{Subadditivity (triangle inequality)}: 
+    $$ p(x + y) \leq p(x) + p(y), \ \forall x, y \in V. $$
+\end{itemize}
+
+In contrast to a norm, a seminorm can satisfy $p(x) = 0$ for some non-zero $x$.
+
+\end{definition}
+
+\begin{example}
+   Consider the vector space $V = C([a, b])$. We can define a seminorm $p: V \to \mathbb{R}$ as follows:
+
+\[
+p(f) = |\frac{1}{b-a} \int_a^b f(x) dx| 
+%\max_{x \in [a, b]} |f(x)|
+\]
+the absolute value of average value of $f(x)$,
+for all $f \in C([a, b])$.
+
+\textbf{Check properties:}
+
+\textbf{1. Non-negativity}: Since the absolute value is always non-negative, we have:
+   \[
+   p(f) \geq 0 \quad \text{for all } f \in C([a, b])
+   \]
+
+\textbf{2. Absolute scalability (homogeneity)}:
+   \[
+   p(\alpha f) =|\alpha \frac{1}{b-a} \int_a^b f(x) dx|= |\alpha| p(f)
+   % \max_{x \in [a, b]} |\alpha f(x)| = |\alpha| \max_{x \in [a, b]} |f(x)| = |\alpha| p(f)
+   \]
+   for any scalar $\alpha$.
+
+\textbf{3. Subadditivity (triangle inequality)}:
+   \[
+   p(f + g) =| \frac{1}{b-a} \int_a^b f(x) dx+ \frac{1}{b-a} \int_a^b g(x) dx|\leq | \frac{1}{b-a} \int_a^b f(x) dx| + |\frac{1}{b-a} \int_a^b g(x) dx|= p(f) + p(g)
+   %\max_{x \in [a, b]} |f(x) + g(x)| \leq \max_{x \in [a, b]} |f(x)| + \max_{x \in [a, b]} |g(x)| = p(f) + p(g)
+   \]
+   for all $f, g \in C([a, b])$.
+
+\textbf{Note that:}
+
+This seminorm is not a norm because %there exist functions
+$f=(x-\frac{b+a}{2}) \in C([a, b])$ with $p(f) = 0$ while $f \neq 0$. %For example, if we take a function that is zero on $[a, b]$ except at a single point, the seminorm would still evaluate to zero while $f$ is not the zero function in the vector space sense.
+
+This example illustrates how seminorms can describe the size of functions in a functional space while allowing for more general cases where the strict requirements of a norm are not met.
+%%maximal and average are sizes of function
+\end{example}
+
+The Minkowski functional is a specific type of seminorm associated with convex sets.
+
+\begin{definition}
+The \textbf{Minkowski functional} (gauge function) associated with a convex, absorbing set $C$ in a vector space $V$ is a seminorm that measures the "size" of a vector relative to the set $C$.
+
+Formally, let $C \subset V$ be a convex, absorbing set. The \textbf{Minkowski functional} $p_C: V \to \dR$ is defined by:
+
+\[
+p_C(x) = \inf \{ \lambda > 0 \mid x \in \lambda C \}
+\]
+
+for all $x \in V$.
+\textbf{Properties of the Minkowski Functional:}
+\begin{itemize}
+    \item \textbf{Non-negativity}: $p_C(x) \geq 0$ for all $x \in V$.
+    \item \textbf{Homogeneity}: $p_C(\alpha x) = |\alpha| p_C(x)$ for all scalars $\alpha \in \dR$ and vectors $x \in V$.
+    \item \textbf{Subadditivity} (triangle inequality): $p_C(x + y) \leq p_C(x) + p_C(y)$ for all $x, y \in V$.
+\end{itemize}
+
+However, $p_C(x) = 0$ does not necessarily imply $x = 0$, so it is generally a seminorm rather than a norm.
+\end{definition}
+
+\textbf{Observations:}
+\begin{itemize}
+    \item $C$ is \textbf{absorbing} if for every $x \in V$, there exists some $\lambda > 0$ such that $x \in \lambda C$, meaning that $C$ "absorbs" all vectors in the space after appropriate scaling.
+    \item $C$ is \textbf{convex} if for any $x, y \in C$ and any $\alpha \in [0, 1]$, we have $\alpha x + (1-\alpha) y \in C$.
+    \item If $C$ is balanced (i.e., symmetric with respect to the origin) and convex, the Minkowski functional behaves like a seminorm.
+\end{itemize}
+
+
+\begin{example}
+    Consider the vector space $\dR^2$ and let $C$ be the unit disk, i.e., the set of all points inside a circle of radius 1 centered at the origin:
+
+\[
+C = \{ (x_1, x_2) \in \dR^2 \mid x_1^2 + x_2^2 \leq 1 \}.
+\]
+
+The Minkowski functional $p_C$ for this set is defined as:
+\[
+p_C(x_1, x_2) = \inf \{ \lambda > 0 \mid (x_1, x_2) \in \lambda C \}.
+\]
+
+In this case, $p_C(x_1, x_2)$ is the Euclidean norm of the vector $(x_1, x_2)$, because scaling the vector by a factor of $\lambda$ such that it lies within the unit disk is equivalent to finding the magnitude of the vector. Therefore, the Minkowski functional in this case is simply:
+
+\[
+p_C(x_1, x_2) = \sqrt{x_1^2 + x_2^2}.
+\]
+
+Thus, for the unit disk in $\dR^2$, the Minkowski functional is just the standard Euclidean norm. This shows that the Minkowski functional can reduce to a norm in specific cases where the convex set $C$ has a symmetric, balanced shape like the unit disk.
+\end{example}
+
+
+\subsection{Basis of Neighborhood}
+In linear topological spaces, the neighborhoods often have additional structure related to the vector space operations. For example, in normed vector spaces, a common basis of neighborhoods consists of open balls centered at the point of interest. In general, any neighborhood basis in a topological vector space can be used to describe how the space behaves locally around a point.
+\begin{definition}
+Let \( X \) be a topological space and \( x \in X \). A collection \( \mathcal{B}_x \) of subsets of \( X \) is a \textit{basis of neighborhoods} at \( x \) if: \\
+i) Each set \( B \in \mathcal{B}_x \) is a neighborhood of \( x \) (i.e., \( x \in B \) and \( B \) is open in \( X \)).\\
+ii) For every neighborhood \( U \) of \( x \), there exists some set \( B \in \mathcal{B}_x \) such that \( B \subseteq U \).
+\end{definition}
+\begin{comment}
+\begin{example}
+    Consider $\dR^n$ with the standard topology induced by the Euclidean norm. Let $ x \in \dR^n $.
+
+A typical basis of neighborhoods at $ x $ is given by open balls centered at $ x $. Specifically:
+
+For any point $ x \in \dR^n $, an open ball centered at $ x $ with radius $ r > 0 $ is defined as:
+  \[
+  B(x, r) = \{ y \in \dR^n \mid \|y - x\| < r \}
+  \]
+  where $\|\cdot\|$ denotes the Euclidean norm.
+
+The collection of open balls $\{ B(x, r) \mid r > 0 \}$ forms a basis of neighborhoods at $ x $. This is because:
+  \begin{itemize}
+    \item Each ball $ B(x, r) $ is an open set containing $ x $.
+    \item For any open set $ U $ containing $ x $, you can always find a radius $ r $ such that $ B(x, r) \subseteq U $.
+  \end{itemize}
+  \end{example}    
+\end{comment}
+
+
+\begin{example}
+    Consider the Hilbert space $\ell^2$. Let $x = (x_i) \in \ell^2$. A standard basis of neighborhoods at $x$ is given by open balls centered at $x$.
+
+For any point $x = (x_i) \in \ell^2$ and any radius $r > 0$, the open ball centered at $x$ with radius $r$ is defined as:
+   \[
+   B(x, r) = \left\{ y = (y_i) \in \ell^2 \mid \|y - x\| < r \right\},
+   \]
+   where $\| \cdot \|$ is the norm induced by the inner product on $\ell^2$, given by:
+   \[
+   \|y - x\| = \left( \sum_{i=1}^\infty |y_i - x_i|^2 \right)^{1/2}.
+   \]
+The collection of all open balls $\{ B(x, r) \mid r > 0 \}$ forms a basis of neighborhoods at $x$ in $\ell^2$ because:
+   \begin{itemize}
+     \item Each ball $B(x, r)$ is an open set in $\ell^2$ and contains $x$.
+     \item For any open set $U$ containing $x$, you can always find a radius $r$ such that $B(x, r) \subseteq U$.
+   \end{itemize}
+
+\end{example}
+
+The following theorem clarifies the local structure of topological spaces by ensuring that neighborhoods around any point can be described using a basis.
+
+\begin{theorem} [The Local Basis Theorem] \hfill \\
+Let $X$ be a topological space and $x \in X$. Then the following statements are equivalent:
+
+\begin{enumerate}
+  \item There exists a basis of neighborhoods $\mathcal{B}_x$ at $x$.
+  \item For every open set $U$ containing $x$, there exists a neighborhood $V \subseteq U$ such that $V$ is also a member of a basis of neighborhoods at $x$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} \hfill
+\begin{itemize}
+  \item \textbf{(1) $\implies$ (2):} \\
+  Suppose $\mathcal{B}_x$ is a basis of neighborhoods at $x$.\\
+  Given any open set $U$ containing $x$, by definition of the basis of neighborhoods, there is some $B \in \mathcal{B}_x$ such that $B \subseteq U$.\\
+  Hence, $V = B$ satisfies the condition.
+  
+  \item \textbf{(2) $\implies$ (1):} \\
+  Suppose for every open set $U$ containing $x$, there exists a neighborhood $V \subseteq U$ that is a member of a basis of neighborhoods at $x$. \\
+  Define $\mathcal{B}_x$ to be the collection of all such neighborhoods $V$.\\
+  This collection $\mathcal{B}_x$ forms a basis of neighborhoods at $x$ because for any open set $U$ containing $x$, there exists a $V \in \mathcal{B}_x$ such that $V \subseteq U$.
+\end{itemize}
+\end{proof}
+
+\begin{lemma} [Neighborhood Basis Lemma] \hfill \\
+Let $X$ be a topological space and $x \in X$. Suppose $\mathcal{B}_x$ is a collection of neighborhoods of $x$ such that for any neighborhood $U$ of $x$, there exists a $B \in \mathcal{B}_x$ such that $B \subseteq U$. Then $\mathcal{B}_x$ forms a basis of neighborhoods at $x$.
+\end{lemma}
+
+\begin{proof} \hfill
+    \begin{itemize}
+  \item \textbf{Neighborhood Property:} By definition, each set $B \in \mathcal{B}_x$ is a neighborhood of $x$. Therefore, $\mathcal{B}_x$ is a collection of neighborhoods of $x$.
+
+  \item \textbf{Basis Property:} Given that for any neighborhood $U$ of $x$, there exists some $B \in \mathcal{B}_x$ such that $B \subseteq U$.
+\end{itemize}
+
+Since $\mathcal{B}_x$ is indeed a basis of neighborhoods at $x$.
+\end{proof}
+The Neighborhood Basis Lemma shows that if a set of neighborhoods around a point can be used to cover any other neighborhood of that point, then this set forms a basis of neighborhoods. This lemma helps in confirming that a collection of neighborhoods is sufficient to describe the local topology around a point.\\
+
+\subsection{Hausdorff property and Separation}
+\subsubsection{Hausdorff property} 
+This property ensures that limits of sequences, if exist, are unique. In the context of linear topological spaces, the Hausdorff property aligns with the intuition of distinct points being distinguishable by their neighborhoods.
+\begin{definition}
+    The Hausdorff property in a linear topological space refers to a condition where any two distinct points in the space can be separated by neighborhoods that do not overlap. \\
+    In other words, for any two distinct points $x$ and $y$ in the space, there exist open sets $U$ containing $x$ and $V$ containing $y$ such that $U \cap V = \emptyset$.
+\end{definition}
+
+\begin{comment}
+\begin{example}
+Consider the Euclidean space $\dR^n$ equipped with the standard topology. This space is a linear topological space that satisfies the Hausdorff property.\\
+\tabb Take two points $x = (x_1, x_2, \dots, x_n)$ and $y = (y_1, y_2, \dots, y_n)$ in $\dR^n$ where $x \neq y$.\\
+Because the Euclidean space is Hausdorff, we can find two open balls $B(x, r)$ and $B(y, s)$ centered at $x$ and $y$ respectively, with radii $r > 0$ and $s > 0$, such that these balls do not overlap, meaning $B(x, r) \cap B(y, s) = \emptyset$.\\
+\tabb This separation of the points $x$ and $y$ by disjoint open sets (the open balls) demonstrates the Hausdorff property in $\dR^n$.
+
+\end{example}
+This example is crucial because it connects abstract topological concepts to familiar, concrete settings and lays the groundwork for more advanced study in various areas of mathematics, such as Uniqueness of Limits, Intuitive Geometry, Foundational in Functional Analysis, or Basis for Generalization.    
+\end{comment}
+
+\begin{example}
+Consider the infinite-dimensional Banach space $\ell^2$. This is also a Hausdorff space under the topology induced by this norm. Specifically, given any two distinct points $x, y \in \ell^2$, where $x \neq y$, the distance between them is $\|x - y\|_2 > 0$. 
+
+Consider two open balls centered at $x$ and $y$ with radii $\frac{\|x - y\|_2}{2}$, respectively. 
+
+Denote these open balls by $B(x, \frac{\|x - y\|_2}{2})$ and $B(y, \frac{\|x - y\|_2}{2})$. These balls are disjoint, meaning that $B(x, \frac{\|x - y\|_2}{2}) \cap B(y, \frac{\|x - y\|_2}{2}) = \emptyset$.
+
+This shows that $\ell^2$ is a Hausdorff space, as disjoint open neighborhoods can separate any two distinct points.
+\end{example}
+This example demonstrates that the Banach space $\ell^2$ satisfies the Hausdorff property, as disjoint open balls can separate any two distinct points in the norm topology. The significance lies in extending the Hausdorff property from finite-dimensional spaces to infinite-dimensional ones. This is fundamental in functional analysis, where spaces like $\ell^2$ are commonly studied.
+
+
+\begin{theorem}
+A continuous image of a compact space in a Hausdorff space is compact.
+\end{theorem}
+
+\begin{proof}
+Let $X$ be a compact space, $Y$ a Hausdorff space, and let $f: X \to Y$ be a continuous function.\\
+\tabb Let $\{V_\alpha\}_{\alpha \in A}$ be an open cover of $f(X)$. So, $f(X) \subseteq \bigcup_{\alpha \in A} V_\alpha$, where each $V_\alpha$ is an open set in $Y$.\\
+\tabb Since $f$ is continuous and $X$ is compact, the pre-image of each open set in $Y$ under $f$ is open in $X$. That is, $f^{-1}(V_\alpha)$ is open in $X$ for each $\alpha \in A$, and $\{ f^{-1}(V_\alpha) \}_{\alpha \in A}$ is an open cover of $X$, because $X \subseteq f^{-1}(f(X)) = \bigcup_{\alpha \in A} f^{-1}(V_\alpha)$.\\
+\tabb Since $X$ is compact, there exists a finite subcover $\{ f^{-1}(V_{\alpha_1}), f^{-1}(V_{\alpha_2}), \dots, f^{-1}(V_{\alpha_n}) \}$ that covers $X$.\\
+\tabb Therefore, the corresponding sets $\{ V_{\alpha_1}, V_{\alpha_2}, \dots, V_{\alpha_n} \}$ form a finite cover of $f(X)$, since $f(X) \subseteq \bigcup_{i=1}^{n} V_{\alpha_i}$.
+
+Thus $f(X)$ is compact in $Y$. (by definition)
+\end{proof}
+This theorem illustrates how compactness is preserved under continuous mappings, and the Hausdorff property ensures that compact sets behave well in the image space.\\
+
+\begin{theorem}
+ Every compact subset of a Hausdorff space is closed.
+\end{theorem}
+
+\begin{proof}
+Let $X$ be a Hausdorff space, and $K \subset X$ be a compact subset. We show that $K$ is closed, which means that its complement $X \setminus K$ is open.\\
+\tabb Take an arbitrary point $x \in X \setminus K$. Since $x \notin K$ and $X$ is Hausdorff, for each point $y \in K$, there exist disjoint open sets $U_y$ and $V_y$ such that $x \in U_y$ and $y \in V_y$. The collection of open sets $\{ V_y : y \in K \}$ forms an open cover of $K$.\\
+\tabb Since $K$ is compact, there exists a finite subcover $\{ V_{y_1}, V_{y_2}, \dots, V_{y_n} \}$ that covers $K$. Let $U = U_{y_1} \cap U_{y_2} \cap \dots \cap U_{y_n}$, an intersection of finitely many open sets containing $x$. The corresponding union $V = V_{y_1} \cup V_{y_2} \cup \dots \cup V_{y_n}$ is an open set containing $K$.\\
+\tabb Observe that $U$ and $V$ are disjoint, $U \cap V = \emptyset$.\\
+\tabb Thus, for every $x \in X \setminus K$, there exists an open neighborhood $U$ of $x$ that is disjoint from $K$. Therefore, $X \setminus K$ is open, which implies that $K$ is closed.
+\end{proof}
+
+The following corollary shows that a continuous bijection between compact and Hausdorff spaces is a homeomorphism, preserving the topological structure of both spaces.
+\begin{corollary}
+A continuous bijection from a compact space to a Hausdorff space is a homeomorphism.
+\end{corollary}
+
+\begin{proof}
+Let $X$ be a compact space, $Y$ be a Hausdorff space, and $f: X \to Y$ be a continuous bijection.\\
+\tabb Since $f$ is a continuous function from $X$ to $Y$ and $X$ is compact, $f(X) = Y$ is compact in $Y$.\\
+\tabb Recall that in a Hausdorff space, compact sets are closed. Hence, $Y = f(X)$ is a closed subset of $Y$, which implies that $f(X)$ is closed in $Y$.\\
+\tabb Since $f$ is a bijection, it has an inverse function $f^{-1}: Y \to X$. Take any closed set $C \subset X$. The set $C$ is compact because $X$ is compact, and since $f$ is continuous, the image $f(C)$ is compact in $Y$.\\
+\tabb Similarly, since $Y$ is Hausdorff, so $f(C)$ is closed in $Y$. Therefore, the pre-image $f^{-1}(f(C)) = C$ is closed in $X$, which means $f^{-1}$ is continuous.\\
+\tabb Thus, $f$ is a continuous bijection with a continuous inverse; hence, a homeomorphism.
+\end{proof}
+
+\subsubsection{Separation}
+The Hausdorff property guarantees the separation of distinct points by disjoint open neighborhoods, ensuring a basic level of distinction between points in a topological space. Exploring stronger separation conditions, such as the higher-order separation axioms, can lead to more refined structures and robust topological results.
+
+\begin{definition}
+A topological space $X$ is said to be $T_1$ if for any two distinct points $x, y \in X$, each has a neighborhood that does not contain the other, i.e., for each $x \in X$, there exists an open set $U$ such that $x \in U$ and $y \notin U$, and vice versa.
+\end{definition}
+
+\begin{comment}
+\begin{example}
+In the Euclidean space $\dR^n$ with the standard topology, for any two distinct points $x, y \in \dR^n$, there exist open neighborhoods $U$ of $x$ and $V$ of $y$ such that $x \in U$, $y \notin U$, and $y \in V$, $x \notin V$. This shows that $\dR^n$ satisfies the $T_1$ separation axiom.
+\end{example}    
+
+
+\begin{example}
+    Consider the infinite-dimensional space \( C([0, 1]) \), the space of all continuous real-valued functions on \([0, 1]\), equipped with the topology of uniform convergence. For any two distinct points \( f, g \in C([0, 1]) \), there exist open neighborhoods \( U \) of \( f \) and \( V \) of \( g \) such that \( f \in U \), \( g \notin U \), and \( g \in V \), \( f \notin V \). 
+
+    For instance, define \( U = \{h \in C([0, 1]) : \|h - f\| < \epsilon\} \) and \( V = \{h \in C([0, 1]) : \|h - g\| < \epsilon\} \), where \( \|h - f\| = \sup_{x \in [0, 1]} |h(x) - f(x)| \) is the uniform norm, and choose \( \epsilon > 0 \) small enough such that the neighborhoods \( U \) and \( V \) are disjoint. 
+
+    This separation shows that \( C([0, 1]) \) satisfies the \( T_1 \) separation axiom, where distinct points (functions in this case) can be separated by open neighborhoods.
+\end{example}
+\end{comment}
+
+\begin{example}
+Consider the infinite-dimensional space \( C_c(\mathbb{R}) \), the space of continuous functions on \( \mathbb{R} \) with compact support, equipped with the topology of uniform convergence on compact sets. 
+
+For any two distinct functions \( f, g \in C_c(\mathbb{R}) \), we can construct disjoint open neighborhoods \( U \) of \( f \) and \( V \) of \( g \). Define:
+\[
+U = \{h \in C_c(\mathbb{R}) : \|h - f\| < \epsilon\}, \quad V = \{h \in C_c(\mathbb{R}) : \|h - g\| < \epsilon\},
+\]
+where \( \|h - f\| = \sup_{x \in \mathrm{supp}(f)} |h(x) - f(x)| \), and \( \epsilon > 0 \) is chosen small enough such that the neighborhoods \( U \) and \( V \) are disjoint. 
+
+Since \( f \) and \( g \) have disjoint supports or differ by at least \( \epsilon \) on their overlapping support, this construction ensures that \( U \cap V = \emptyset \). 
+
+This example illustrates that \( C_c(\mathbb{R}) \) satisfies the \( T_1 \) separation axiom, as distinct functions can be separated by disjoint open neighborhoods.
+\end{example}
+
+
+The following theorem establishes the existence and uniqueness of weak solutions to elliptic PDEs, with coercivity ensuring stability and controlled behavior of the bilinear form. This guarantees unique, stable solutions under small perturbations, forming a foundation for reliable numerical methods like the finite element method.
+
+\begin{theorem} [Riesz Representation Theorem] \hfill \\
+Let $H$ be a Hilbert space over $\dR$ or $\dC$. For every continuous linear functional $f \in H'$, where $H'$ denotes the dual space of $H$, there exists a unique element $u_f \in H$ such that
+\[
+f(v) = \langle v, u_f \rangle \quad \forall v \in H,
+\]
+where $\langle \cdot, \cdot \rangle$ denotes the inner product on $H$.
+
+Moreover, the norm of the functional $f$ satisfies
+\[
+\|f\| = \|u_f\|.
+\]
+\end{theorem}
+\begin{proof}
+Let \( H \) be a Hilbert space over \( \dR \) or \( \dC \), and let \( f \in H' \), where \( H' \) is the dual space of \( H \). We aim to find \( u_f \in H \) such that:
+\[
+f(v) = \langle v, u_f \rangle \quad \forall v \in H.
+\]
+
+If \( f = 0 \), then we take \( u_f = 0 \), which satisfies \( f(v) = \langle v, u_f \rangle = 0 \). Assume \( f \neq 0 \). Define a candidate \( u_f \) as follows:
+\[
+u_f = \arg \max \left\{ |f(v)| : v \in H, \|v\| = 1 \right\}.
+\]
+By the properties of \( f \), such a \( u_f \) exists because the supremum in the definition of the norm of \( f \) is achieved.
+
+Then, define \( u_f = \frac{f(v_0)}{\|v_0\|^2} v_0 \), where \( v_0 \) is the vector that achieves the supremum in the definition of \( \|f\| \). Then for any \( v \in H \):
+\[
+f(v) = f\left( \frac{\|v\|}{v_0} \right) \sim 0
+\]
+
+Suppose there exist \( u_f, u_f' \in H \) such that:
+\[
+f(v) = \langle v, u_f \rangle = \langle v, u_f' \rangle \quad \forall v \in H.
+\]
+Then:
+\[
+\langle v, u_f - u_f' \rangle = 0 \quad \forall v \in H.
+\]
+Choosing \( v = u_f - u_f' \), we get \( \|u_f - u_f'\|^2 = 0 \), so \( u_f = u_f' \). Hence, \( u_f \) is unique.
+
+By definition of the norm of a functional:
+\[
+\|f\| = \sup_{\|v\| = 1} |f(v)|.
+\]
+Using the representation \( f(v) = \langle v, u_f \rangle \):
+\[
+|f(v)| = |\langle v, u_f \rangle| \leq \|v\| \|u_f\| = \|u_f\| \quad \text{for all } v \in H.
+\]
+Taking \( v = \frac{u_f}{\|u_f\|} \) (if \( u_f \neq 0 \)), we achieve equality:
+\[
+\|f\| = \|u_f\|.
+\]
+\end{proof}
+
+The Riesz Representation Theorem plays a key role in ensuring the existence of a solution. Specifically, it allows us to identify every continuous linear functional $f \in V'$ (the dual space of $V$) with a unique element $u_f \in V$ such that the linear functional can be expressed as an inner product. This representation simplifies the problem by converting the functional equation $a(u, v) = f(v)$ into a problem of finding a vector $u \in V$ that satisfies this relation.
+\begin{example}
+Let \( H \) be a Hilbert space, and let \( M \subset H \) be a closed subspace. Suppose \( u \in H \) is a point such that \( u \notin M \). By the separation property in Hilbert spaces, there exists a continuous linear functional \( f \in H' \) such that: $f(v) = 0 \quad \forall v \in M,$
+and
+$f(u) \neq 0$ \\
+
+To find such a functional \( f \), consider the orthogonal projection of \( u \) onto \( M \), denoted by \( u_M \). Since \( u \notin M \), the difference \( u - u_M \) is nonzero and is orthogonal to every element in \( M \). Define a functional \( f \in H' \) by setting
+\[
+f(v) = \langle v, u - u_M \rangle \quad \forall v \in H.
+\]
+This functional \( f \) is continuous, and by the Riesz Representation Theorem, it is represented by the element \( u - u_M \in H \).
+
+Now, for any \( v \in M \), we have
+\[
+f(v) = \langle v, u - u_M \rangle = 0,
+\]
+since \( u - u_M \) is orthogonal to \( M \). However, for \( u \) itself, we have
+\[
+f(u) = \langle u, u - u_M \rangle = \|u - u_M\|^2 \neq 0,
+\]
+as \( u \neq u_M \).
+
+Thus, \( f \) separates the point \( u \) from the subspace \( M \), as desired. This illustrates how the Riesz Representation Theorem can be used to construct a functional that exploits the separation property of closed subspaces in Hilbert spaces.
+\end{example}
+
+The flowing theorem provides conditions under which a functional equation \( a(u, v) = f(v) \) has a unique solution in a Hilbert space, ensuring existence and uniqueness based on properties of the bilinear form \( a(\cdot, \cdot) \).
+
+\begin{theorem}[Lax-Milgram] \hfill \\
+Let $V$ be a real Hilbert space, and let $a: V \times V \to \dR$ be a continuous bilinear form that is coercive. That is, there exists a constant $\alpha > 0$ such that for all $v \in V$,
+\[
+a(v, v) \geq \alpha \|v\|^2.
+\]
+Then, for every continuous linear functional $f \in V'$, where $V'$ is the dual space of $V$, there exists a unique $u \in V$ such that
+\[
+a(u, v) = f(v) \quad \forall v \in V.
+\]
+\end{theorem}
+\pagebreak
+\textbf{Note:}
+\begin{itemize}
+    \item \textbf{Bilinear Form:} A bilinear form $a: V \times V \to \dR$ is a function that is linear in each argument. That is, for all $u, v, w \in V$ and scalars $\alpha, \beta \in \dR$, the following hold:
+    \[
+    a(\alpha u + \beta v, w) = \alpha a(u, w) + \beta a(v, w),
+    \]
+    \[
+    a(u, \alpha v + \beta w) = \alpha a(u, v) + \beta a(u, w).
+    \]
+    This means $a(\cdot, \cdot)$ behaves like a linear function with respect to both inputs independently.
+    
+    \item \textbf{Coercivity:} A bilinear form $a$ is said to be coercive if there exists a constant $\alpha > 0$ such that for all $v \in V$,
+    \[
+    a(v, v) \geq \alpha \|v\|^2.
+    \]
+    This property ensures that the form dominates the norm of the vectors, providing a lower bound that controls the behavior of $v$ and guarantees uniqueness in solutions to problems.
+\end{itemize}
+
+\begin{proof}
+\textbf{Existence:} Since $a(\cdot, \cdot)$ is coercive and continuous, we can define a linear operator $A: V \to V'$ by $A(u)(v) = a(u, v)$ for all $u, v \in V$. The continuity of $a$ implies that $A$ is a bounded operator.
+
+By the Riesz Representation Theorem, there exists a unique element $u \in V$ such that for every $v \in V$, the linear functional $f$ is represented as
+\[
+a(u, v) = f(v).
+\]
+Thus, a solution $u$ exists for the given bilinear form.
+
+\textbf{Uniqueness:} Assume that there are two solutions $u_1, u_2 \in V$ such that
+\[
+a(u_1, v) = f(v) \quad \text{and} \quad a(u_2, v) = f(v) \quad \forall v \in V.
+\]
+Subtracting the two equations gives
+\[
+a(u_1 - u_2, v) = 0 \quad \forall v \in V.
+\]
+Now, set $v = u_1 - u_2$. By the coercivity of $a$, we have
+\[
+a(u_1 - u_2, u_1 - u_2) \geq \alpha \|u_1 - u_2\|^2.
+\]
+But since $a(u_1 - u_2, u_1 - u_2) = 0$, it follows that
+\[
+\alpha \|u_1 - u_2\|^2 = 0,
+\]
+which implies that $u_1 = u_2$. Therefore, the solution is unique.
+\end{proof}
+
+The Lax-Milgram Theorem is instrumental in solving variational problems and ensuring the existence and uniqueness of solutions to functional equations. In particular, it provides a framework for separating a given functional equation by identifying a unique solution in a Hilbert space. This is especially useful when we need to transform differential or boundary value problems into their weak (variational) forms, where the solution space is defined by an inner product.
+
+\begin{example}
+Consider the boundary value problem
+\[
+-\frac{d^2 u}{dx^2} = f(x) \quad \text{on} \quad [0, 1],
+\]
+with boundary conditions \( u(0) = u(1) = 0 \), where \( f \in L^2([0, 1]) \) is a given function.
+
+To apply the Lax-Milgram Theorem, we reformulate this problem in a weak (variational) form. Define the Hilbert space \( V = H_0^1([0, 1]) \), the Sobolev space of functions that vanish at the boundary points \( 0 \) and \( 1 \). We aim to find \( u \in V \) such that
+\[
+a(u, v) = f(v) \quad \forall v \in V,
+\]
+where
+$
+a(u, v) = \int_0^1 \frac{du}{dx} \frac{dv}{dx} \, dx \quad \text{and} \quad f(v) = \int_0^1 f(x) v(x) \, dx.
+$
+
+The bilinear form \( a(u, v) \) is continuous and coercive on \( V \), satisfying the conditions of the Lax-Milgram Theorem. Therefore, there exists a unique \( u \in V \) that solves this weak formulation. This \( u \) is the unique weak solution to the original boundary value problem.
+\end{example}
+
+
+\subsection{Normality and Complete Spaces}
+\subsubsection{Normality}
+The normality property in topology is a condition that ensures the separation of disjoint closed sets by disjoint open sets. Specifically, a topological space is normal if any two disjoint closed subsets can be separated by disjoint open neighborhoods.
+\begin{definition}
+    A topological space $X$ is normal if for every pair of disjoint closed subsets $A$ and $B$ of $X$, there exist disjoint open sets $U$ and $V$ such that $A \subseteq U$ and $B \subseteq V$.
+\end{definition}
+
+\begin{comment}
+\begin{example}
+    Consider $\dR^n$ with the usual topology. \\
+    Let $A$ and $B$ be two disjoint closed sets. \\
+    Note that if $A$ and $B$ are two disjoint closed disks, you can always find two disjoint open disks such that one contains $A$ and the other contains $B$. This separation property verifies that $\dR^n$ is normal.
+\end{example}    
+\end{comment}
+
+\begin{example}
+Consider the Banach space $c_0$, which consists of all infinite sequences of real or complex numbers $x = (x_1, x_2, \dots)$ that converge to 0. This space is equipped with the supremum norm defined by
+$\|x\|_{\infty} = \sup_{n \geq 1} |x_n|.$
+
+The topology on $c_0$ is the norm topology induced by this supremum norm.
+
+Let $A$ and $B$ be two disjoint closed subsets of $c_0$. For example:
+\begin{itemize}
+    \item $A = \{ x \in c_0 : \|x - a\|_{\infty} \leq \epsilon \}$ where $a \in c_0$ and $\epsilon > 0$,
+    \item $B = \{ y \in c_0 : \|y - b\|_{\infty} \leq \delta \}$ where $b \in c_0$ and $\delta > 0$.
+\end{itemize}
+Assume that $A$ and $B$ are disjoint, meaning $\|a - b\|_{\infty} > \epsilon + \delta$.
+
+Because $c_0$ is a Banach space, which is a complete normed vector space, it is also normal. Thus, we can find disjoint open sets $U$ and $V$ such that:
+\begin{itemize}
+    \item $A \subseteq U$,
+    \item $B \subseteq V$,
+    \item $U$ and $V$ are disjoint.
+\end{itemize}
+
+These open sets can be chosen as open balls centered at $a$ and $b$ with radii slightly larger than $\epsilon$ and $\delta$, ensuring that $U$ and $V$ do not overlap.
+\end{example}
+The Banach space $c_0$ is an example of an infinite-dimensional space that is normal. The normality property ensures that any two disjoint closed sets in $c_0$ can be separated by disjoint open sets. This property is significant in functional analysis and the study of Banach spaces.
+
+In normal spaces, disjoint closed sets can be separated by a continuous function, a property that plays an important role in the theory of topological spaces and functional analysis.
+
+\begin{lemma} [Urysohn's Lemma] \hfill \\
+    Let $X$ be a normal topological space, and let $A$ and $B$ be disjoint closed subsets of $X$. Then there exists a continuous function $f: X \to [0,1]$ such that:
+\begin{itemize}
+    \item $f(a) = 0$ \, for all \, $a \in A$,
+    \item $f(b) = 1$ \, for all \, $b \in B$.
+\end{itemize}
+\end{lemma}
+
+\begin{proof}
+Let $X$ be a normal topological space, $A$ and $B$ be disjoint closed subsets of $X$. 
+
+Since $X$ is normal, for each $n \in \dN$, we can separate $A$ and $B$ by open sets. Specifically, we can find open sets $U_n$ and $V_n$ such that:
+$A \subseteq U_n$,
+$B \subseteq V_n$,
+$\overline{U_{n+1}} \subseteq U_n$,
+$\overline{V_{n+1}} \subseteq V_n$.
+
+This means that $U_n$ "shrinks" towards $A$, and $V_n$ "shrinks" towards $B$ as $n$ increases.
+
+Define the function $f: X \to [0, 1]$ as follows. For each $x \in X$:
+\[
+f(x) = \inf \left\{ \frac{n}{N} : x \in U_n \right\}, \quad \text{where} \quad N \in \dN.
+\]
+
+Observe that:
+\begin{itemize}
+    \item For $x \in A$, $f(x) = 0$ because $x$ is contained in all the $U_n$,
+    \item For $x \in B$, $f(x) = 1$ because $x$ is contained in none of the $U_n$ and eventually gets closer to $V_n$.
+\end{itemize}
+
+The function $f$ is continuous because of how $U_n$ and $V_n$ are chosen. Specifically:
+\begin{itemize}
+    \item The sets $U_n$ and $V_n$ are open,
+    \item $\overline{U_{n+1}} \subseteq U_n$ ensures that $f$ changes smoothly from 0 to 1 as we move from $A$ to $B$.
+\end{itemize}
+
+Thus, $f$ is continuous, and the requirements of Urysohn's Lemma are satisfied.
+\end{proof}
+
+\subsubsection{Complete Spaces}
+A space is complete if every Cauchy sequence converges to a point within the space. This property ensures that solutions to problems involving limits and sequences are contained within the space. Completeness is crucial in functional analysis and other areas because it guarantees that limits of sequences are well-defined and manageable within the space.
+
+\begin{definition}
+    A linear topological space $X$ is said to be \textbf{complete} if every Cauchy sequence $(x_n)$ in $X$ converges to a point $x \in X$. That is, if for every Cauchy sequence $(x_n)$, there exists an $x \in X$ such that $ \lim_{n \to \infty} x_n = x $.
+\end{definition}
+
+\begin{comment}
+\begin{example}
+    Consider the space of real numbers $\dR$ with the usual metric, where the metric is given by $d(x, y) = |x - y|$.
+
+Observe that:
+\begin{itemize}
+  \item \textbf{Space:} $\dR$ (the set of all real numbers).
+  \item \textbf{Metric:} $d(x, y) = |x - y|$, which defines the topology of the space.
+\end{itemize}
+
+Any Cauchy sequence of real numbers $(x_n)$ will converge to a real number $x$ in $\dR$. For example, the sequence $x_n = \frac{1}{n}$ is a Cauchy sequence in $\dR$ because as $n$ becomes large, the terms of the sequence get arbitrarily close to 0. The limit of this sequence is 0, which is a real number in $\dR$, so $\dR$ is complete.
+\end{example}    
+\end{comment}
+
+\begin{example}
+Consider the space of all bounded sequences of real numbers, $ \ell^\infty $.
+
+\textbf{Norm:} The norm is given by $ \|x\|_\infty = \sup_{n} |x_n| $, where $ x = (x_n) $ is a sequence and $ \sup_{n} |x_n| $ denotes the supremum of the absolute values of the sequence's terms.
+
+
+The space $ \ell^\infty $ is complete because every Cauchy sequence in $ \ell^\infty $ converges to a bounded sequence in $ \ell^\infty $. For example, if $ (x^k) $ is a Cauchy sequence in $ \ell^\infty $, then there exists a bounded sequence $ x $ such that $ \lim_{k \to \infty} \|x^k - x\|_\infty = 0 $. Hence, $ \ell^\infty $ is a complete space.
+\end{example}
+
+A space can be complete or incomplete depending on the norm defined on it. Below, we examine the completeness of $C([a, b])$ under two different norms: the $\|\cdot\|_\infty$ norm, where it is complete, and the $L^p$ norm, where it is not.
+
+\begin{example}
+Consider the space $C([a, b])$.
+
+\textbf{Norm:} The norm is given by $\|f\|_\infty = \max_{x \in [a, b]} |f(x)|$, where $\|f\|_\infty$ represents the maximum absolute value of $f(x)$ on $[a, b]$.
+
+
+The space $C([a, b])$ is complete with respect to the $\|\cdot\|_\infty$ norm. This means that every Cauchy sequence $\{f_n\}$ in $\|\cdot\|_\infty$ converges to a function $f$ in $C([a, b])$. For example, if $\{f_n\}$ is a Cauchy sequence, then there exists a continuous function $f \in C([a, b])$ such that $\lim_{n \to \infty} \|f_n - f\|_\infty = 0$. Hence, $C([a, b])$ is a complete space under the $\|\cdot\|_\infty$ norm.\\
+
+On the other hand, $C([a, b])$ is not complete with respect to the $L^p$ norm for $1 \leq p < \infty$.
+
+\textbf{Norm:} The $L^p$ norm is given by $\|f\|_p = \left( \int_a^b |f(x)|^p \, dx \right)^{1/p}$.
+
+To illustrate this incompleteness, consider the sequence of functions $\{f_n(x)\}$ defined by
+\[
+f_n(x) = \left(\frac{x - a}{b - a}\right)^n \quad \text{for } x \in [a, b].
+\]
+As $n \to \infty$, $f_n(x)$ converges pointwise to a function $f(x)$ such that
+\[
+f(x) = 
+\begin{cases} 
+0, & \text{for } a \leq x < b, \\
+1, & \text{for } x = b.
+\end{cases}
+\]
+This limiting function $f(x)$ is in $L^p([a, b])$ for $1 \leq p < \infty$, but it is not in $C([a, b])$ because it is discontinuous at $x = b$. Therefore, the sequence $\{f_n\}$ does not converge to an element in $C([a, b])$ under the $L^p$ norm. Hence, $C([a, b])$ is not complete with respect to the $L^p$ norm.
+\end{example}
+
+
+\begin{theorem} [Banach Space Theorem:] 
+Let $ (X, \|\cdot\|) $ be a normed vector space. The space $ X $ is a Banach space if and only if for every Cauchy sequence $ (x_n) $ in $ X $, there exists an element $ x \in X $ such that $ \lim_{n \to \infty} \|x_n - x\| = 0 $.
+\end{theorem}
+\begin{proof}
+\textit{Forward Direction:} 
+
+Assume that $ (X, \|\cdot\|) $ is a Banach space. This means $ X $ is a complete normed vector space. By definition of completeness, every Cauchy sequence in $ X $ converges to a limit within $ X $. Therefore, if $ (x_n) $ is a Cauchy sequence in $ X $, then there exists an element $ x \in X $ such that $ \lim_{n \to \infty} \|x_n - x\| = 0 $. Hence, every Cauchy sequence in $ X $ converges to a limit in $ X $.
+
+\textit{Reverse Direction:} 
+
+Assume that $ (X, \|\cdot\|) $ is a normed vector space in which every Cauchy sequence converges to a limit within $ X $. We need to show that $ X $ is complete.
+
+Let $ (x_n) $ be a Cauchy sequence in $ X $. By assumption, since every Cauchy sequence converges in $ X $, there exists an element $ x \in X $ such that $ \lim_{n \to \infty} \|x_n - x\| = 0 $. Therefore, $ (x_n) $ converges to $ x $ in $ X $, proving that $ X $ is complete.
+
+Thus, $ X $ is a Banach space.
+\end{proof}
+The Banach Space Theorem is a fundamental result in functional analysis that characterizes complete normed vector spaces, known as Banach spaces. This theorem underscores the importance of completeness in ensuring that limits of sequences are well-defined within the space, which is crucial for various analytical methods and theoretical results in mathematics.
+
+Another key result in functional analysis is the Closed Graph Theorem, which provides a condition for a linear operator between normed vector spaces to be continuous.
+\begin{theorem}
+Let $ X $ and $ Y $ be normed vector spaces, and let $ T: X \to Y $ be a linear operator. If the graph of $ T $ is closed in $ X \times Y $, then $ T $ is a continuous operator.
+\end{theorem}
+
+\begin{proof}
+Assume that the graph of $ T $, defined as $ G(T) = \{ (x, T(x)) \mid x \in X \} \subseteq X \times Y $, is closed. 
+
+Consider a sequence $ (x_n) $ in $ X $ such that $ x_n \to x $ and $ T(x_n) \to y $ in $ Y $.
+
+Since the graph of $ T $ is closed, the pair $ (x, y) $ must belong to the graph of $ T $ if $ (x_n, T(x_n)) \to (x, y) $ in $ X \times Y $.
+
+Thus, $ (x, y) \in G(T) $, which means $ y = T(x) $.
+
+Therefore, $ T $ is continuous because $ T(x_n) \to T(x) $ as $ x_n \to x $. This proves the theorem.
+\end{proof}
+
+\subsection{Open Mapping Theorem}
+The Open Graph Theorem is a fundamental result in functional analysis, stating that a linear operator between Banach spaces with an open graph is necessarily continuous. In the context of partial differential equations (PDEs), this theorem helps ensure that solutions to PDEs, when viewed as operators, behave continuously under certain conditions. In numerical analysis, it provides a theoretical foundation for the stability of approximations to linear systems. Similarly, in linear programming, it can be applied to analyze the continuity of the mappings between spaces of feasible solutions and objective functions.
+\pagebreak
+
+\begin{theorem}[Open Graph Theorem] \hfill \\
+Let $X$ and $Y$ be Banach spaces, and let $T : X \to Y$ be a linear operator. Suppose the graph of $T$, defined as:
+$$ G(T) = \{ (x, T(x)) \mid x \in X \} \subseteq X \times Y, $$
+is an \textit{open} subset of $X \times Y$ in the product topology (induced by the norms of $X$ and $Y$). Then, the operator $T$ is continuous.
+\end{theorem}
+
+\begin{proof}
+Assume $T$ is not continuous and derive a contradiction.
+
+Suppose $T$ is not continuous. This means that there exists a sequence $\{ x_n \} \subset X$ with $x_n \to 0$ in $X$, but $T(x_n)$ does \textit{not} converge to $0$ in $Y$. More precisely, this implies that there exists an $\epsilon > 0$ such that for all $n$, $\| T(x_n) \|_Y \geq \epsilon$ for some $x_n \to 0$.
+
+Since $T$ is linear and the graph of $T$ is open, we consider the sequences $\{ x_n \}$ and $\{ T(x_n) \}$ in $X$ and $Y$, respectively. The assumption that $G(T)$ is open means that there is a neighborhood around each point of $G(T)$. In particular, for the sequence $\{ (x_n, T(x_n)) \}$ approaching $(0, 0)$, there must be a neighborhood $U$ of $(0, 0)$ such that $(x_n, T(x_n))$ belongs to $G(T)$ for sufficiently large $n$.
+
+
+By the openness of the graph, for sufficiently large $n$, the points $(x_n, T(x_n))$ are within this neighborhood of $(0, 0)$. However, this contradicts the assumption that $\| T(x_n) \|_Y \geq \epsilon$, as it implies that $T(x_n)$ cannot approach $0$ in $Y$, despite $x_n \to 0$ in $X$.
+
+
+Since the assumption that $T$ is not continuous leads to a contradiction, we conclude that $T$ must be continuous.
+
+Thus, the operator $T$ is continuous, completing the proof of the Open Graph Theorem.
+\end{proof}
+
+The Open Graph Theorem plays a central role in guaranteeing the continuity of operators across a wide range of mathematical fields, which in turn helps ensure stability and robustness. In particular, it assures that small perturbations in data, such as numerical errors in boundary conditions, will not lead to large deviations in the computed solution. Its applications ensure that solutions or approximations behave predictably and continuously under various perturbations.
+
+\subsection{Closed Graph Theorem}
+Another important result is the Closed Graph Theorem. While the Open Graph Theorem studies the behavior of a continuous and surjective operator on open sets; the Closed Graph Theorem studies the continuity of the closed graphs.
+The Closed Graph Theorem states that if a linear operator between Banach spaces has a closed graph, then the operator is continuous. Specifically, the graph of the operator is the set of pairs $(x, T(x))$, and if this set is closed in the product space, the operator must be continuous. This result is particularly useful in functional analysis, ensuring well-behaved operators in spaces where verifying continuity directly might be difficult. It applies to a variety of settings, including PDEs and numerical analysis, where continuity of solution operators is crucial.
+
+\begin{theorem}[Closed Graph Theorem] \hfill \\
+Let $X$ and $Y$ be Banach spaces, and let $T: X \to Y$ be a linear operator. If the graph of $T$
+\[
+G(T) = \{(x, T(x)) \in X \times Y : x \in X\} 
+\]
+is closed in the product space $X \times Y$, then $T$ is a continuous (bounded) operator.
+\end{theorem}
+
+\begin{proof}
+Assume that $T$ is \emph{not} continuous. This would mean that there exists a sequence $\{x_n\}$ in $X$ such that $x_n \to 0$ in $X$, but $T(x_n)$ does \emph{not} converge to $0$ in $Y$. To formalize this, assume:
+\[
+\|x_n\|_X \to 0, \quad \text{but} \quad \|T(x_n)\|_Y \geq \epsilon \text{ for some fixed } \epsilon > 0 \text{ and for all } n.
+\]
+
+Since $x_n \to 0$ in $X$, we know that $\|x_n\|_X \to 0$. Define a new sequence $\{y_n\}$ by normalizing $\{x_n\}$:
+\[
+y_n = \frac{x_n}{\|x_n\|_X}, \quad \text{for } n \text{ such that } \|x_n\|_X \neq 0.
+\]
+Then, $\|y_n\|_X = 1$ for all $n$, and the sequence $\{y_n\}$ is bounded in $X$. Now consider the corresponding sequence $T(y_n) = \frac{T(x_n)}{\|x_n\|_X}$. Since $\|T(x_n)\|_Y \geq \epsilon$, we have:
+\[
+\|T(y_n)\|_Y = \frac{\|T(x_n)\|_Y}{\|x_n\|_X} \geq \frac{\epsilon}{\|x_n\|_X}.
+\]
+Thus, $T(y_n)$ is not converging to $0$ and is unbounded in $Y$.
+
+We now have a sequence $\{y_n\}$ such that $\|y_n\|_X = 1$ and $T(y_n)$ is unbounded. By the \textbf{Banach-Alaoglu Theorem}, there is a subsequence $\{y_{n_k}\}$ that converges weakly to some $y \in X$. Since $\|y_n\|_X = 1$ for all $n$, we have $\|y\|_X \leq 1$.
+
+Now, since $T$ is linear, the graph of $T$ is closed. If $y_{n_k} \to y$ weakly in $X$ and $T(y_{n_k})$ is bounded, by the closed graph property, we must have that $(y, T(y))$ is in the graph of $T$. However, this contradicts the assumption that $T(y_n)$ is unbounded.
+
+Thus, the assumption that $T$ is not continuous leads to a contradiction. Therefore, $T$ must be continuous.
+\end{proof}
+
+In Banach spaces, the Closed Graph Theorem is a powerful tool for proving the continuity of operators without directly checking their norm behavior, which is often complex in infinite-dimensional spaces. Its applications span solving PDEs, ensuring stability in numerical approximations, and validating operator continuity in optimization problems, making it a fundamental result in functional analysis.
+\vfill
+\pagebreak
+
+\begin{comment}
+\subsection{Metric-Induced Linear Topological Spaces} \hfill \\
+A Metric-Induced Linear Topological Space is a topological vector space in which the topology is generated by a metric. In this case, the space has a distance function that satisfies the properties of a metric, such as non-negativity, symmetry, and the triangle inequality. The open sets in the topology can be described in terms of open balls defined by the metric. Importantly, every metric-induced topology is Hausdorff, meaning distinct points can be separated by neighborhoods. Such spaces often arise in analysis when studying function spaces equipped with norms or inner products.
+
+\begin{definition}
+    Let $ (X, d) $ be a metric space where $ d $ is a metric on $ X $. A topology $ \tau $ on $ X $ is induced by the metric $ d $ if the open sets in $ \tau $ can be written as unions of open balls, where an open ball is defined as 
+$$
+B(x, \epsilon) = \{y \in X \mid d(x, y) < \epsilon\}.
+$$
+If $ (X, \tau) $ is also a vector space and the operations of vector addition and scalar multiplication are continuous with respect to $ \tau $, then $ (X, \tau) $ is called a metric-induced linear topological space.
+\end{definition}
+
+\begin{example}
+    Consider the space $ C([a, b]) $, the space of continuous functions on the interval $ [a, b] $, with the supremum norm defined as
+$$
+\|f\|_\infty = \sup_{x \in [a, b]} |f(x)| \quad \text{for all} \quad f \in C([a, b]).
+$$
+
+The metric induced by this norm is given by
+$$
+d(f, g) = \|f - g\|_\infty = \sup_{x \in [a, b]} |f(x) - g(x)|.
+$$
+
+This metric defines a topology on $ C([a, b]) $, called the uniform topology, in which a sequence of functions $ f_n $ converges to $ f $ if and only if $ \|f_n - f\|_\infty \to 0 $ as $ n \to \infty $.
+
+Since the operations of function addition and scalar multiplication are continuous in this topology, $ C([a, b]) $ equipped with the supremum norm is a metric-induced linear topological space.
+
+\end{example}
+
+\textbf{Verification for being Linear Topological Spaces:}
+
+Let $ (X, d) $ be a vector space equipped with a metric-induced topology. We need to verify the continuity of vector addition and scalar multiplication.
+
+\textbf{1. Vector Addition:}
+
+Let $ + : X \times X \to X $ be the vector addition map, where $ + (x, y) = x + y $. To verify the continuity of this map, we must show that for any $ x_0, y_0 \in X $ and any $ \epsilon > 0 $, there exist neighborhoods $ U $ of $ x_0 $ and $ V $ of $ y_0 $ such that for all $ x \in U $ and $ y \in V $, we have $ d(x + y, x_0 + y_0) < \epsilon $.
+
+Using the triangle inequality for the metric $ d $, we have:
+$$
+d(x + y, x_0 + y_0) \leq d(x, x_0) + d(y, y_0).
+$$
+Thus, if we choose $ U = B(x_0, \epsilon/2) $ and $ V = B(y_0, \epsilon/2) $, where $ B(x_0, \epsilon/2) $ and $ B(y_0, \epsilon/2) $ are open balls around $ x_0 $ and $ y_0 $, respectively, then for all $ x \in U $ and $ y \in V $, we have:
+$$
+d(x + y, x_0 + y_0) \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon.
+$$
+Therefore, vector addition is continuous.
+
+\textbf{2. Scalar Multiplication:}
+
+Let $ \cdot : \dR \times X \to X $ be the scalar multiplication map, where $ \cdot (\alpha, x) = \alpha x $. We need to verify that for any $ \alpha_0 \in \dR $, $ x_0 \in X $, and any $ \epsilon > 0 $, there exist neighborhoods $ U $ of $ \alpha_0 $ and $ V $ of $ x_0 $ such that for all $ \alpha \in U $ and $ x \in V $, we have $ d(\alpha x, \alpha_0 x_0) < \epsilon $.
+
+Using the properties of the metric $ d $, we have:
+$$
+d(\alpha x, \alpha_0 x_0) \leq d(\alpha x, \alpha x_0) + d(\alpha x_0, \alpha_0 x_0).
+$$
+
+For the first term, by the linearity of the metric with respect to scalar multiplication, we have:
+$$
+d(\alpha x, \alpha x_0) = |\alpha| \cdot d(x, x_0),
+$$
+which shows that small changes in $ x $ result in small changes in $ \alpha x $. 
+
+For the second term, we have:
+$$
+d(\alpha x_0, \alpha_0 x_0) = |\alpha - \alpha_0| \cdot d(0, x_0),
+$$
+which shows that small changes in $ \alpha $ result in small changes in $ \alpha x_0 $.
+
+Thus, scalar multiplication is continuous.
+
+Since both vector addition and scalar multiplication are continuous, $ (X, d) $ is a linear topological space.
+
+Metric-Induced Linear Topological Spaces provide a concrete way to measure distances and study convergence, often arising from norms. These spaces are first-countable, Hausdorff, and simplify the analysis of sequences, limits, and compactness. Key examples like Banach and Hilbert spaces play crucial roles in functional analysis, with applications in areas such as quantum mechanics and optimization. Their structure makes them powerful and intuitive tools for both mathematical and applied problems. Certain properties that may not hold in general linear topological spaces are automatically satisfied in metric-induced spaces, further simplifying analysis and offering a stronger framework.
+
+\begin{definition}
+    A topological space $X$ is said to be \textit{first-countable} if for every point $x \in X$, there exists a countable collection of neighborhoods $\{U_n\}_{n=1}^{\infty}$ of $x$ such that for any neighborhood $U$ of $x$, there exists some $U_n$ with $U_n \subseteq U$. The collection $\{U_n\}_{n=1}^{\infty}$ is called a countable local base (or countable neighborhood basis) at $x$.
+\end{definition}
+
+\begin{example}
+    \textbf{Example:}
+
+Consider the space $ \dR^n $ with the Euclidean metric $d(x, y) = \sqrt{\sum_{i=1}^{n} (x_i - y_i)^2}$. For any point $ x_0 \in \dR^n $, the collection of open balls 
+$$
+B(x_0, \frac{1}{n}) = \{x \in \dR^n \mid d(x_0, x) < \frac{1}{n}\}, \quad n \in \mathbb{N},
+$$
+forms a countable local base at $x_0$. For any neighborhood $U$ of $x_0$, there exists some $B(x_0, \frac{1}{n}) \subseteq U$, thus fulfilling the property of first countability.
+
+
+In this example, the open balls $B(x_0, \frac{1}{n})$ are defined using the metric, and their radii decrease as $n \to \infty$. This countable collection forms a local base around $x_0$, which is guaranteed by the fact that the topology on $\dR^n$ is induced by a metric. 
+
+In contrast, in a general linear topological space, such a countable local base may not exist. For instance, in spaces with non-metrizable topologies, there may be no countable collection of neighborhoods that covers all possible neighborhoods of a point. Thus, first countability is not guaranteed in general linear topological spaces, but it always holds in metric-induced spaces.
+
+\end{example}
+\pagebreak
+    
+\end{comment}
+
+\section{Linear topological spaces and Partial Differential Equations}
+Linear topological spaces play a key role in many fields, such as PDEs, numerical analysis, and linear programming. They provide powerful tools like weak topologies and functional spaces to prove the existence, uniqueness, and stability of solutions, making them essential in both theoretical and applied mathematics.
+\subsection{Sobolev Space}
+\subsubsection{Definition}
+Sobolev spaces, denoted by \( W^{k, p}(\dR^n) \), are fundamental in the study of partial differential equations (PDEs) and functional analysis. They generalize the concept of differentiability and integrability, allowing for functions that possess weak derivatives. Sobolev spaces are used to study functions whose derivatives (up to a certain order) are also \(L^p\)-integrable, making them essential for the analysis of solutions to PDEs.
+
+\begin{definition}
+The Sobolev space \(W^{k, p}(\dR^n)\) consists of functions \(f \in L^p(\dR^n)\) whose weak derivatives up to order \(k\) also belong to \(L^p(\dR^n)\). Specifically,
+\[
+W^{k, p}(\dR^n) = \{ f \in L^p(\dR^n) : D^\alpha f \in L^p(\dR^n) \text{ for all multi-indices } \alpha \text{ with } |\alpha| \leq k \}.
+\]
+Here, \(D^\alpha f\) denotes the weak derivative of \(f\) of order \(\alpha\), and \(L^p(\dR^n)\) is the space of \(p\)-integrable functions.
+\end{definition}
+
+\begin{remark}
+Consider the Sobolev space \(W^{1, 2}(\dR^n)\), also known as the \(H^1\)-space. It contains functions \(f \in L^2(\dR^n)\) whose first-order weak derivatives also belong to \(L^2(\dR^n)\). The space is essential in the study of energy minimization problems in physics and engineering.
+\end{remark}
+
+\subsubsection{Linear Topological Space Validation}
+Sobolev spaces are equipped with a norm that combines both the \(L^p\)-norm of the function itself and the \(L^p\)-norm of its derivatives. This norm induces a topology that makes Sobolev spaces complete, turning them into Banach spaces (or Hilbert spaces when \(p = 2\)).
+
+\begin{definition}
+The norm on the Sobolev space \(W^{k, p}(\dR^n)\) is defined as:
+\[
+\|f\|_{W^{k, p}} = \left( \sum_{|\alpha| \leq k} \|D^\alpha f\|_{L^p}^p \right)^{1/p},
+\]
+where the sum is taken over all multi-indices \(\alpha\) with order \(|\alpha| \leq k\), and \(D^\alpha f\) represents the weak derivative of \(f\) of order \(\alpha\).
+\end{definition}
+
+In the case where \(p = 2\), the Sobolev space \(W^{k, 2}(\dR^n)\) becomes a Hilbert space, with the norm being derived from an inner product that incorporates both the function and its derivatives.
+
+\begin{example}
+Consider the Sobolev space \(W^{1, 2}(\dR)\), the norm is:
+\[
+\|f\|_{W^{1, 2}} = \left( \|f\|_{L^2}^2 + \|f'\|_{L^2}^2 \right)^{1/2}.
+\]
+This norm combines the \(L^2\)-norm of the function and its first derivative.
+\end{example}
+
+The Sobolev space \(W^{k, p}(\dR^n)\) is a \emph{linear topological space}, or topological vector space, because vector addition and scalar multiplication are continuous operations in the topology induced by the Sobolev norm.
+
+\begin{itemize}
+    \item \textbf{Vector addition}: The map \((f, g) \mapsto f + g\) is continuous. For any \(f_0, g_0 \in W^{k, p}(\dR^n)\) and any \(\epsilon > 0\), there exists \(\delta > 0\) such that if \(\|f - f_0\|_{W^{k, p}} < \delta\) and \(\|g - g_0\|_{W^{k, p}} < \delta\), then \(\|f + g - (f_0 + g_0)\|_{W^{k, p}} < \epsilon\).
+    
+    \item \textbf{Scalar multiplication}: The map \((\lambda, f) \mapsto \lambda f\) is continuous. For any scalar \(\lambda_0 \in \dR\), function \(f_0 \in W^{k, p}(\dR^n)\), and any \(\epsilon > 0\), there exists \(\delta > 0\) such that if \(|\lambda - \lambda_0| < \delta\) and \(\|f - f_0\|_{W^{k, p}} < \delta\), then \(\|\lambda f - \lambda_0 f_0\|_{W^{k, p}} < \epsilon\).
+\end{itemize}
+
+Since both vector addition and scalar multiplication are continuous, \(W^{k, p}(\dR^n)\) is a \emph{linear topological space}.
+%\vfill
+%\pagebreak
+\begin{comment}
+
+\subsection{Fixed Point Theorem} \hfill \\
+The Fixed Point Theorem ensures that no matter how much you crumple, fold, or twist a map of a region within its boundaries, there will always be at least one point on the map that lands exactly over its corresponding real-world location.
+
+Fixed point theorems are fundamental in various fields of mathematics and science, including analysis, topology, economics (especially in game theory and economic modeling), and computer science (like in the analysis of algorithms).
+
+\begin{theorem}
+    A \emph{Fixed Point Theorem} asserts that for certain types of functions and spaces, there exists at least one point within the domain of the function for which the value of the function at that point is equal to the point itself. Formally, if $f$ is a function from a set $X$ into itself, a point $x \in X$ is called a fixed point of $f$ if $f(x) = x$. The theorem can be stated for various contexts and conditions. In this section, we focus on Banach Fixed Point Theorem.
+    
+    \textbf{Banach Fixed Point Theorem:} If $X$ is a complete metric space and $f: X \to X$ is a contraction (i.e., there exists a constant $c < 1$ such that $d(f(x), f(y)) \leq c \cdot d(x, y)$ for all $x, y \in X$), then $f$ has exactly one fixed point and iteratively applying $f$ starting from any point in $X$ converges to this fixed point.
+
+\end{theorem}
+
+\begin{proof}
+Choose any $x_0 \in X$ and define a sequence $(x_n)$ by setting $x_{n+1} = f(x_n)$ for all $n \geq 0$. We first show that $(x_n)$ is a Cauchy sequence.
+
+Given any integers $m, n$ with $m > n$, we have:
+\[
+d(x_m, x_n) = d(f(x_{m-1}), f(x_{n-1})) \leq c \cdot d(x_{m-1}, x_{n-1}) \leq \cdots \leq c^{m-n} \cdot d(x_1, x_0).
+\]
+Since $c < 1$, as $m, n \to \infty$, $c^{m-n} \to 0$. Thus, $d(x_m, x_n) \to 0$, showing that $(x_n)$ is Cauchy.
+
+Since $X$ is complete, there exists some $x^* \in X$ such that $x_n \to x^*$. Taking the limit as $n \to \infty$ in the equation $x_{n+1} = f(x_n)$, and using the continuity of $f$, we get:
+\[
+x^* = \lim_{n \to \infty} x_{n+1} = \lim_{n \to \infty} f(x_n) = f\left(\lim_{n \to \infty} x_n\right) = f(x^*).
+\]
+Hence, $x^*$ is a fixed point of $f$. To show uniqueness, suppose $y^*$ is another fixed point of $f$. Then,
+\[
+d(x^*, y^*) = d(f(x^*), f(y^*)) \leq c \cdot d(x^*, y^*).
+\]
+If $x^* \neq y^*$, then $d(x^*, y^*) > 0$, but this would imply $d(x^*, y^*) \leq c \cdot d(x^*, y^*) < d(x^*, y^*)$, a contradiction. Therefore, $x^* = y^*$.
+\end{proof}
+
+The Fixed Point Theorem plays a crucial role in various fields, including partial differential equations (PDEs), numerical analysis, and linear programming. In PDEs, it helps establish the existence of solutions by ensuring that certain operators have fixed points, which correspond to the solutions of the equations. In numerical methods, fixed point iteration techniques are commonly employed to approximate solutions to nonlinear systems. Additionally, in linear programming, the Fixed Point Theorem supports optimization algorithms, particularly those that require iterative processes to converge to optimal solutions. In the next section, we investigate further into those applications.
+\vfill
+\pagebreak
+\end{comment}
+
+\subsection{Partial Differential Equations}
+Linear topological spaces, particularly Sobolev spaces and weak topologies, are essential tools in solving Partial Differential Equations (PDEs), especially when classical methods are insufficient. Notable examples include nonlinear elliptic PDEs and nonlinear reaction-diffusion equations, which arise in various applications, from steady-state phenomena to time-dependent processes. In such cases, solutions may lack the smoothness needed to satisfy the PDEs in the classical sense. By employing weak formulations within Sobolev spaces, we can identify weak solutions that generalize classical solutions, thus extending the applicability of these methods. Additionally, fixed-point theorems and contraction mappings provide robust approaches to address the nonlinearities in these equations. In the following, we demonstrate how these concepts facilitate the solution of nonlinear elliptic PDEs and nonlinear reaction-diffusion problems.
+\subsubsection{Essential Theorems for Nonlinear PDE Analysis}
+To approach these problems rigorously, we need some foundational tools.
+
+The Sobolev Embedding Theorem is a foundational result that demonstrates how certain Sobolev spaces can be continuously embedded into spaces of more regular functions, providing insight into the regularity of solutions.
+\begin{theorem}[Sobolev Embedding Theorem] \hfill \\
+Let \( H^k(\Omega) \) be a Sobolev space on a domain \( \Omega \subset \mathbb{R}^n \). The Sobolev Embedding Theorem states that certain Sobolev spaces can be continuously embedded into spaces of continuous functions or \( L^{\infty} \)-integrable functions, depending on the dimension \( n \) and the order \( k \) of the Sobolev space. Specifically, if \( k > \frac{n}{2} \), then
+\[
+H^k(\Omega) \subset C^0(\Omega) \cap L^{\infty}(\Omega).
+\]
+\end{theorem}
+\vfill
+\pagebreak
+\begin{proof}
+The proof relies on applying interpolation techniques and Sobolev inequalities, which provide estimates on Sobolev norms in terms of the \( L^p \)-norms of function derivatives. By the Gagliardo-Nirenberg inequality, functions in \( H^k(\Omega) \) for \( k > \frac{n}{2} \) exhibit sufficient regularity to ensure continuity and boundedness. This result follows from controlling the oscillations of the function via its higher derivatives. Applying these inequalities and leveraging compactness within \( \Omega \), we conclude that \( H^k(\Omega) \subset C^0(\Omega) \cap L^{\infty}(\Omega) \), completing the embedding.
+\end{proof}
+
+Elliptic Regularity Theory is a powerful tool in understanding the behavior of solutions to elliptic PDEs. It tells us under what conditions we can expect solutions to be more regular, particularly when solving in certain function spaces.
+\begin{theorem}[Elliptic Regularity Theory] \hfill \\
+Let \( \Omega \subset \mathbb{R}^n \) be an open domain, and consider the elliptic partial differential equation
+\[
+-\Delta u + \lambda u = g,
+\]
+where \( \Delta \) denotes the Laplacian operator, \( \lambda \notin \sigma_p(-\Delta) \) (the spectrum of \( -\Delta \)), and \( g \in L^2(\Omega) \). Elliptic regularity theory provides conditions under which the solution \( u \) possesses higher regularity. In particular, under these conditions, the solution \( u \) belongs to the Sobolev space \( H^2(\Omega) \cap H_0^1(\Omega) \).
+\end{theorem}
+
+\begin{proof}
+The proof uses the theory of weak solutions and bootstrapping arguments. Since \( g \in L^2(\Omega) \) and \( \lambda \) does not belong to the spectrum of \( -\Delta \), we know the resolvent of \( -\Delta \) exists and is bounded. By treating the equation in the weak sense and applying elliptic estimates, we obtain that \( u \) has higher regularity than \( L^2(\Omega) \) alone would suggest. Through iteratively applying elliptic estimates, known as bootstrapping, we deduce that \( u \in H^2(\Omega) \cap H_0^1(\Omega) \), establishing the desired regularity.
+\end{proof}
+
+The Contraction Mapping Theorem, or Banach's Fixed Point Theorem, is essential in proving existence and uniqueness of solutions by transforming the problem into finding a fixed point of a contraction mapping.
+\begin{theorem}[Contraction Mapping Theorem] \hfill \\
+Let \( (X, d) \) be a complete metric space, and let \( T : X \rightarrow X \) be a contraction mapping, meaning there exists a constant \( 0 \leq c < 1 \) such that
+\[
+d(T(x), T(y)) \leq c \, d(x, y)
+\]
+for all \( x, y \in X \). Then \( T \) has a unique fixed point \( x^* \in X \) such that \( T(x^*) = x^* \).
+\end{theorem}
+
+\begin{proof}
+To prove the existence of a unique fixed point, consider an arbitrary point \( x_0 \in X \) and define the sequence \( \{ x_n \} \) by \( x_{n+1} = T(x_n) \). By the contraction property, the distances \( d(x_n, x_{n+1}) \) decrease geometrically, converging to zero as \( n \to \infty \). Since \( X \) is complete, this Cauchy sequence converges to some limit \( x^* \in X \). Taking the limit in the recurrence relation \( x_{n+1} = T(x_n) \) yields \( T(x^*) = x^* \), showing that \( x^* \) is a fixed point. Uniqueness follows by assuming two fixed points \( x^* \) and \( y^* \) and showing that \( d(x^*, y^*) = 0 \), hence \( x^* = y^* \).
+\end{proof}
+\subsubsection{Non-linear Elliptic PDE}
+Consider the nonlinear elliptic boundary value problem:
+\[
+\begin{cases}
+\Delta u + \lambda u + u^2 = g, & \text{in } \Omega, \\
+u = 0, & \text{on } \partial \Omega,
+\end{cases}
+\]
+where \( \Omega \subset \mathbb{R}^3 \) is open and bounded with smooth boundary, \( \lambda \in \mathbb{R} \) is a constant, and \( g \in L^2(\Omega) \) is given.
+
+To make the PDE meaningful, we need a suitable function space \( X \) where both the differential operators and the boundary conditions are well-defined. Given \( g \in L^2(\Omega) \), we require the left side of the equation to lie in \( L^2(\Omega) \) as well. A natural candidate is the Sobolev space:
+\[
+X = H^2(\Omega) \cap H_0^1(\Omega),
+\]
+equipped with the \( H^2(\Omega) \)-norm. In this space, if \( u \in X \), then \( \Delta u + \lambda u \in L^2(\Omega) \) and \( u = 0 \) on \( \partial \Omega \) (in the trace sense).
+
+By the Sobolev Embedding Theorem, if \( k > \frac{n}{2} \) for \( H^k(\Omega) \) with spatial dimension \( n \), then \( H^k(\Omega) \) is continuously embedded in \( C^0(\Omega) \cap L^{\infty}(\Omega) \). Here, \( n = 3 \) and \( k = 2 \), so:
+\[
+H^2(\Omega) \cap H_0^1(\Omega) \subset C^0(\Omega) \cap L^{\infty}(\Omega).
+\]
+This gives the continuity estimate:
+\[
+\|v\|_{L^{\infty}(\Omega)} \leq C \|v\|_{H^2(\Omega)}, \quad \forall v \in H^2(\Omega) \cap H_0^1(\Omega).
+\]
+Thus, if \( u \in H^2(\Omega) \cap H_0^1(\Omega) \), then \( u^2 \in L^2(\Omega) \) with:
+\[
+\|u^2\|_{L^2(\Omega)} \leq C \|u\|_{H^2(\Omega)}^2.
+\]
+Define a nonlinear term as:
+\[
+h(u) = g - u^2 \in L^2(\Omega),
+\]
+and consider the related linear elliptic boundary value problem:
+\[
+\begin{cases}
+\Delta w + \lambda w = h(u), & \text{in } \Omega, \\
+w = 0, & \text{on } \partial \Omega.
+\end{cases}
+\]
+By elliptic regularity theory, if \( \lambda \notin \sigma_p(-\Delta) \), then there exists a unique weak solution \( \tilde{w} \in H^2(\Omega) \cap H_0^1(\Omega) \) for this problem, with \( \tilde{w} \) depending on the nonhomogeneous term \( h(u) \).
+
+Define a mapping \( A: X \to X \) by
+\[
+A(u) = \tilde{w},
+\]
+where \( \tilde{w} \) is the unique solution to the linear BVP for a given \( u \in X \). Note that fixed points of \( A \) correspond to weak solutions of the original equation, because if \( A(u) = u \), then \( u \) satisfies the original PDE.
+
+To ensure \( A \) is a contraction, consider the ball \( B_X(0, r) \subset X \) of radius \( r \) around zero. By the continuity properties of \( A \), we have:
+\[
+\|A(u)\|_{H^2(\Omega)} \leq C (\|g\|_{L^2(\Omega)} + \|u\|_{H^2(\Omega)}^2).
+\]
+For sufficiently small \( \|g\|_{L^2(\Omega)} \) and \( r \), we can ensure \( A \) maps \( B_X(0, r) \) into itself and satisfies the contraction condition. Thus, by the Contraction Mapping Theorem, there exists a unique fixed point \( u_0 \in B_X(0, r) \) such that \( A(u_0) = u_0 \).
+
+\subsubsection{Non-linear Reaction Diffusion}
+Consider the initial-boundary value problem (IVBVP) for a nonlinear reaction-diffusion equation on a bounded domain \( \Omega \subset \mathbb{R}^n \) with smooth boundary:
+\[
+\begin{cases}
+u_t - \Delta u = f(u), & \text{in } \Omega \times [0, T], \\
+u = 0, & \text{on } \partial \Omega \times [0, T], \\
+u(x, 0) = g(x), & \text{for } x \in \Omega,
+\end{cases}
+\]
+where \( g \in H_0^1(\Omega) \), \( T > 0 \), and \( f: \mathbb{R} \to \mathbb{R} \) is globally Lipschitz. This means there exists a constant \( C > 0 \) such that
+\[
+|f(z) - f(\tilde{z})| \leq C |z - \tilde{z}| \quad \forall z, \tilde{z} \in \mathbb{R}.
+\]
+
+To establish the existence of a unique weak solution, we apply the Contraction Mapping Theorem on the space \( X_\tau = C([0, \tau]; L^2(\Omega)) \) for a sufficiently small \( \tau \). We define the norm \( \|v\|_\tau = \max_{0 \leq t \leq \tau} \|v(t)\|_{L^2(\Omega)} \).
+
+\textbf{Linearized Problem:} For a fixed \( u \in X_\tau \), consider the linearized problem:
+   \[
+   \begin{cases}
+   w_t - \Delta w = f(u), & \text{in } \Omega \times [0, T], \\
+   w = 0, & \text{on } \partial \Omega \times [0, T], \\
+   w(x, 0) = g(x), & \text{for } x \in \Omega.
+   \end{cases}
+   \]
+   By parabolic theory, this has a unique weak solution \( \tilde{w} \) in \( X_\tau \).
+
+\textbf{Definition of the Map:} Define a map \( A: X_\tau \to X_\tau \) by \( A(u) = \tilde{w} \), where \( \tilde{w} \) solves the linearized problem.
+
+\textbf{Contraction Property:} For \( u_1, u_2 \in X_\tau \), we show that \( A \) is a contraction:
+   \[
+   \|A(u_1) - A(u_2)\|_\tau \leq C \tau \|u_1 - u_2\|_\tau.
+   \]
+   Choosing \( \tau \) small enough ensures \( A \) is a contraction.
+
+\textbf{Existence and Uniqueness:} By the Contraction Mapping Theorem, \( A \) has a unique fixed point in \( X_\tau \), giving a unique weak solution \( u \) on \( [0, \tau] \). Repeating this process extends \( u \) to \( [0, T] \).
+%\vfill
+%\pagebreak
+\section{Conclusion}
+This thesis has explored the essential properties of linear topological vector spaces, tracing the journey from foundational vector spaces to advanced topics such as weak and weak* topologies, dual spaces, and reflexivity. We have demonstrated how these spaces form a crucial framework for studying continuous mappings and linear operators, underpinned by theorems like the Banach-Steinhaus and Hahn-Banach Theorems.
+
+Our discussion underscored the relevance of Banach and Hilbert spaces and their application in addressing problems in partial differential equations (PDEs). The emphasis on weak and weak* topologies illustrates their value in convergence and duality theory within functional analysis and optimization.
+
+Looking forward, linear topological spaces present exciting research potential. In optimization and machine learning, weak and weak* topologies enhance algorithm efficiency and provide insights into stability, particularly in model training and convergence. Further research into fixed-point theorems within these spaces could yield novel techniques for solving PDEs and refining iterative numerical methods. Additionally, broader exploration into areas such as algebraic topology and geometry promises to reveal new solutions to theoretical and practical challenges.
+
+The continued study of linear topological spaces will undoubtedly deepen both their theoretical foundations and their impact across mathematics and applied fields.
+
+
+\newpage
+\bibliographystyle{plain} 
+\begin{thebibliography}{11}
+
+\bibitem{s1}
+Brenner, Susanne C., and Ridgway Scott.
+\newblock {\em The Mathematical Theory of Finite Element Methods}.
+\newblock Texts in Applied Mathematics, 3rd edition, Springer, 2007.
+
+\bibitem{s2} 
+Cook, John
+\newblock {\em Separation of Convex Sets in Linear Topological Spaces}. 
+\newblock Department of Mathematics, University of Texas at Austin, 1988.
+
+\bibitem{s3}
+Evans, Lawrence C.
+\newblock {\em Partial Differential Equations}.
+\newblock Graduate Studies in Mathematics, 2nd edition, American Mathematical Society, 2010.
+
+\bibitem{s4} 
+Friedberg, Stephen H.
+\newblock {\em Linear Algebra, Fifth Edition}. 
+\newblock Pearson, 2019.
+
+\bibitem{s5} 
+Harwani, Kamal
+\newblock {\em Topological Vector Space and its Properties}. 
+\newblock Department of Mathematics, Indian Institute of Technology, Hyderabad Telangana, 2019.
+
+\bibitem{s6}
+Luenberger, David G.
+\newblock {\em Optimization by Vector Space Methods}.
+\newblock John Wiley \& Sons, 1997.
+
+\bibitem{s7} 
+McGuffey, William C.
+\newblock {\em Linear Topological Space}. 
+\newblock Auburn University, 2014.
+
+\bibitem{s8} 
+Melrose, Richard
+\newblock {\em Functional Analysis}. 
+\newblock Department of Mathematics, MIT.
+
+\bibitem{s9} 
+Mehta, Shanshyam B.
+\newblock {\em Fixed Points, Equilibria and Maximal Elements in Linear Topological Spaces}. 
+\newblock Commentationes Mathematicae Universitatis Carolinae, 1987.
+
+\bibitem{s10} 
+Semmes, Stephen
+\newblock {\em Linear Topological Space}. 
+\newblock Department of Mathematics, Rice University, 2003.
+
+\bibitem{s11} 
+Nguyen, Vu Tuong Vi
+\newblock {\em Metric Space}. 
+\newblock Department of Mathematics and Statistics, University of North Florida, 2022.
+
+\end{thebibliography}
+
+
+\end{document}
+
